@@ -2,6 +2,7 @@ export default {
     // props: [""],
     template: `
         <section>
+            NOTE IMG
         </section>
     `,
     components: {},

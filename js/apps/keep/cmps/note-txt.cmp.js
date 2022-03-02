@@ -1,7 +1,8 @@
 export default {
-    // props: [""],
+    props: ["note"],
     template: `
-        <section>
+        <section class="note-txt">
+            {{note.info.txt}}
         </section>
     `,
     components: {},
