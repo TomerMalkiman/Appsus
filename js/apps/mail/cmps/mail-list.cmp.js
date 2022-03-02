@@ -1,12 +1,12 @@
 import mailPreview from "./mail-preview.cmp.js"
 
 export default {
-  props: ["mails"],
-  template: `
+    props: ["mails"],
+    template: `
         <section class="mail-list">
             <ul class="clean-list">
                 <li v-for="mail in mails" :key="mail.id">
-                    <mail-preview :mail="mail"/>
+                        <mail-preview @remove="remove(mail.id)" @toggle-read="toggleRead(mail.id)" :mail="mail"/>
                 </li>
 
             </ul>
@@ -14,16 +14,25 @@ export default {
 
         </section>
     `,
-  components: {
-      mailPreview
-  },
-  created() {},
-  data() {
-    return {}
-  },
-  methods: {},
-  computed: {},
-  unmounted() {},
+    components: {
+        mailPreview
+    },
+    created() { },
+    data() {
+        return {}
+    },
+    methods: {
+        toggleRead(mailId, ev) {
+            this.$emit('toggle-read', mailId)
+
+        },
+        remove(mailId, ev) {
+            this.$emit('remove', mailId);
+
+        },
+    },
+    computed: {},
+    unmounted() { },
 }
 
 

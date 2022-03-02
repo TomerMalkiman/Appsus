@@ -1,16 +1,46 @@
-.mail-preview{
-    display: flex;
+.mail-preview {
+    display        : flex;
     justify-content: space-between;
+    border-bottom: 1px solid rgba(73, 69, 69, 0.342);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: relative;
 }
 
-.mail-sender-name{
-width: 20%;
+
+
+
+.mail-preview:hover{
+    cursor: pointer;
+    border: 1px solid black;
+   
+
 }
 
-.mail-subject{
+.actions-btns{
+    display: none;
+    right: 0;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.mail-preview:hover .actions-btns{
+    display:block;
+}
+.mail-sender-name {
     width: 20%;
 }
 
-.mail-content{
+.mail-subject {
+    width: 20%;
+}
+
+.mail-content {
     width: 50%;
+}
+
+.mail-date {
+    width: 10%;
+    position: absolute;
+    right: 0;
 }
