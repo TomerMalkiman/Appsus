@@ -1,0 +1,14 @@
+/* add note */
+
+.add-note {
+    margin: auto;
+    width: fit-content;
+}
+
+.add-note textarea {
+    resize: none;
+    max-width: 200px;
+    width: 200px;
+    max-height: 70px;
+    height: 70px;
+}

@@ -1,17 +1,35 @@
+import noteTxt from "./note-txt.cmp.js"
+import noteTodos from "./note-todos.cmp.js"
+import noteVideo from "./note-video.cmp.js"
+import noteImg from "./note-img.cmp.js"
+
+
 export default {
     props: ["note"],
     template: `
-        <section>
-            <div class="note">
+        <section  v-if="note" :style="bgc" class="note">
+            <component :is="note.type" :note="note"/>
+            <div class="options">
+                <input v-model="note.style.backgroundColor" type="color" :id="note.id">
+                <label :for="note.id"><img class="note-icon" src="../../../img/keep-icons/paintbrush.png" /></label>
             </div>
         </section>
     `,
-    components: {},
+    components: {
+        noteTodos,
+        noteImg,
+        noteTxt,
+        noteVideo
+    },
     created() {},
     data() {
         return {}
     },
     methods: {},
-    computed: {},
+    computed: {
+        bgc() {
+            return `background-color: ${this.note.style.backgroundColor}`
+        }
+    },
     unmounted() {},
 }

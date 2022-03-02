@@ -1,21 +1,21 @@
-import noteTxt from "./note-txt.cmp.js"
-import noteTodos from "./note-todos.cmp.js"
-import noteVideo from "./note-video.cmp.js"
-import noteImg from "./note-img.cmp.js"
+import notePreview from "./note-preview.cmp.js"
 
 export default {
-    props: ["notes"],
+    props: ["pinnedNotes", "unPinnedNotes"],
     template: `
-        <section v-if="notes">
-            <!-- {{notes}} -->
-            <component v-for="note in notes" :is="note.type" :note="note"/>
+        <section class="notes main-layout" v-if="pinnedNotes || unPinnedNotes">
+            <section class="note-list">
+                <h4 class="pinned-headline">Pinned</h4>
+                <note-preview v-for="note in pinnedNotes" :key="note.id" :note="note" />
+            </section>
+            <section class="note-list">
+                <h4 class="pinned-headline">Other</h4>
+                <note-preview v-for="note in unPinnedNotes" :key="note.id" :note="note" />
+            </section>
         </section>
     `,
     components: {
-        noteTodos,
-        noteImg,
-        noteTxt,
-        noteVideo
+        notePreview
     },
     created() {},
     data() {
@@ -23,5 +23,6 @@ export default {
     },
     methods: {},
     computed: {},
+    mounted() {},
     unmounted() {},
 }

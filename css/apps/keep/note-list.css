@@ -1,0 +1,22 @@
+.note-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.notes {
+    max-width: 80vw;
+}
+
+.notes>* {
+    margin: 30px;
+}
+
+.pinned-headline {
+    color: gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-120%);
+}

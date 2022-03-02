@@ -4,9 +4,15 @@
 @import 'parts/base.css';
 @import 'parts/layout.css';
 @import 'parts/helpers.css';
+
 /* @import 'parts/mq.css'; */
+
+
 /* @import 'parts/buttons.css'; */
+
+
 /* @import 'parts/fonts.css'; */
+
 
 /* COMPONENTS */
 
@@ -18,4 +24,7 @@
 
 /* APPS*/
 
-@import 'apps/mail/mail-preview.css'
+@import 'apps/mail/mail-preview.css';
+@import 'apps/keep/note-preview.css';
+@import 'apps/keep/note-list.css';
+@import 'apps/keep/keep-app.css'

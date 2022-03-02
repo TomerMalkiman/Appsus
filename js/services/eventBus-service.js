@@ -1,3 +1,6 @@
+export const eventBus = { on, emit };
+
+
 function on(eventName, listener) {
     const callListener = ({ detail }) => {
         listener(detail);
@@ -11,5 +14,3 @@ function on(eventName, listener) {
 function emit(eventName, data) {
     window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
 }
-
-export const eventBus = { on, emit };

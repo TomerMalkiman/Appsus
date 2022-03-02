@@ -1,15 +1,14 @@
 export default {
-    // props: [""],
+    props: ["note"],
     template: `
-        <section>
-            NOTE IMG
+        <section :style="bgc" class="note-img">
+            <h4>{{note.info.title}}</h4>
+            <img :src="note.info.url"/>
         </section>
     `,
     components: {},
     created() {},
-    data() {
-        return {}
-    },
+    data() {},
     methods: {},
     computed: {},
     unmounted() {},

@@ -1,14 +1,19 @@
 export default {
-    // props: [""],
+    props: ["note"],
     template: `
-        <section>
-            NOTE VIDEO
+        <section :style="bgc" class="note-video">
+            <h4>{{note.info.title}}</h4>
+            <iframe width="210"
+                :src="note.info.url">
+            </iframe>
         </section>
     `,
     components: {},
     created() {},
     data() {
-        return {}
+        return {
+            backgroundcolor: '#ffffff',
+        }
     },
     methods: {},
     computed: {},
