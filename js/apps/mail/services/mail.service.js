@@ -6,7 +6,17 @@ export const mailService = {
     query,
 }
 
+export const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+   }
+
 const MAILS_KEY = 'mails'
+
+
+function getUser(){
+
+}
 
 function query() {
     return storageService.query(MAILS_KEY);
@@ -23,7 +33,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tomer'
                     },
                     {
                         id: utilService.makeId(),
@@ -31,7 +42,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Ben'
                     },
                     {
                         id: utilService.makeId(),
@@ -39,7 +51,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: true,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Shifra'
                     },
                     {
                         id: utilService.makeId(),
@@ -47,7 +60,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Yankle'
                     },
                     {
                         id: utilService.makeId(),
@@ -55,7 +69,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: true,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'David'
                     },
                     {
                         id: utilService.makeId(),
@@ -63,7 +78,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: true,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tom'
                     },
                     {
                         id: utilService.makeId(),
@@ -71,7 +87,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Amir'
                     },
                     {
                         id: utilService.makeId(),
@@ -79,7 +96,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tal'
                     },
                     {
                         id: utilService.makeId(),
@@ -87,7 +105,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tomer'
                     },
                     {
                         id: utilService.makeId(),
@@ -95,7 +114,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tomer'
                     },
                     {
                         id: utilService.makeId(),
@@ -103,7 +123,8 @@ function _createMails() {
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         sentAt: Date.now(),
-                        to: 'momo@momo.com'
+                        to: 'momo@momo.com',
+                        from: 'Tomer'
                     }
                 ]
                 console.log(mails)

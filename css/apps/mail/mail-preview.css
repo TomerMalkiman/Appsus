@@ -1,0 +1,16 @@
+.mail-preview{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mail-sender-name{
+width: 20%;
+}
+
+.mail-subject{
+    width: 20%;
+}
+
+.mail-content{
+    width: 50%;
+}
