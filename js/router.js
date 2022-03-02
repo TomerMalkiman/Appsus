@@ -1,3 +1,7 @@
+import homePage from './pages/app-home.cmp.js';
+import aboutPage from './pages/app-about.cmp.js';
+import mailApp from './apps/mail/pages/mail-index.cmp.js';
+
 const routes = [
     {
         path: '/',
@@ -8,13 +12,13 @@ const routes = [
         component: aboutPage
     },
     {
-        path: '/book',
-        // component:
+        path: '/mail',
+        component: mailApp
     },
-    {
-        path: '/',
-        // component: 
-    },
+    // {
+    //     path: '/',
+    //     component: 
+    // },
 ];
 
 export const router = VueRouter.createRouter({
