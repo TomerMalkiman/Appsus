@@ -12,4 +12,10 @@
 
 @import 'cmps/main-header.css';
 @import 'cmps/main-footer.css';
+
 /* @import 'cmps/screen.css'; */
+
+
+/* APPS*/
+
+@import 'apps/mail/mail-preview.css'
