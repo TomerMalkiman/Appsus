@@ -6,7 +6,9 @@
     gap: 5px;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    position: relative;
+    height: fit-content;
 }
 
 .note img {
@@ -15,7 +17,8 @@
 
 .note-icon {
     width: 20px;
-    align-self: flex-end;
+    position: absolute;
+    bottom: 0
 }
 
 .note input {
