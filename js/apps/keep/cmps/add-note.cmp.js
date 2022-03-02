@@ -85,7 +85,7 @@ export default {
                 }
             }
             this.$emit('save-note', this.note)
-                // this.note.type = null;
+            this.note.type = null;
         }
     },
     computed: {},

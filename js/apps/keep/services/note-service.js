@@ -14,20 +14,22 @@ function query() {
     return storageService.query(NOTES_KEY)
 }
 
-// function youtube_parser(url) {
-//     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-//     var match = url.match(regExp);
-//     return (match && match[7].length == 11) ? match[7] : false;
-// }
+function youtube_parser(url) {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    return (match && match[7].length == 11) ? match[7] : false;
+}
 
 function saveNote(note) {
     if (note.type === 'note-video' || note.type === 'note-img') {
+        const URL = youtube_parser(note.info.url)
+
         note = {
             id: utilService.makeId(),
             type: note.type,
             isPinned: false,
             info: {
-                url: note.info.url,
+                url: `https://www.youtube.com/embed/${URL}`,
                 title: note.info.title
             },
             style: {
@@ -60,11 +62,11 @@ function saveNote(note) {
             }
         }
     }
-    // return query()
-    //     .then(notes => {
-    //         notes.push(note)
-    //         return storageService.put(NOTES_KEY, note)
-    //     })
+    return query()
+        .then(notes => {
+            notes.push(note)
+            return storageService.put(NOTES_KEY, note)
+        })
 }
 
 function _createNotes() {
