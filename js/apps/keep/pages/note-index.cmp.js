@@ -7,7 +7,7 @@ export default {
     template: `
         <section v-if="pinnedNotes || unPinnedNotes" class="main-layout">
             <add-note @save-note="saveNote"/>
-            <note-list :unPinnedNotes="unPinnedNotes" :pinnedNotes="pinnedNotes" />
+            <note-list :unPinnedNotes="unPinnedNotes" :pinnedNotes="pinnedNotes" @note-deleted="deleteNote"/>
         </section>
     `,
     components: {
@@ -33,6 +33,16 @@ export default {
         saveNote(note) {
             noteService.saveNote(note)
                 .then(note => this.unPinnedNotes.push(note))
+        },
+        deleteNote(noteId) {
+            noteService.deleteNote(noteId)
+            var pinnedIdx = this.pinnedNotes.findIndex(note => note.id === noteId);
+            var unPinnedIdx = this.unPinnedNotes.findIndex(note => note.id === noteId);
+            if (pinnedIdx >= 0) {
+                this.pinnedNotes.splice(pinnedIdx, 1)
+            } else {
+                this.unPinnedNotes.splice(unPinnedIdx, 1)
+            }
         }
     },
     computed: {},

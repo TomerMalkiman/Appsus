@@ -26,14 +26,16 @@ export default {
     data() {
         return {}
     },
-    methods: {},
+    methods: {
+        deleteNote(noteId) {
+            console.log(noteId)
+            this.$emit('note-deleted', noteId)
+        }
+    },
     computed: {
         bgc() {
             return `background-color: ${this.note.style.backgroundColor}`
         },
-        deleteNote(noteId) {
-
-        }
     },
     unmounted() {},
 }

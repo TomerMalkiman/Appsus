@@ -5,6 +5,7 @@ export const noteService = {
     _createNotes,
     query,
     saveNote,
+    deleteNote,
 }
 
 const NOTES_KEY = 'notes';
@@ -12,6 +13,10 @@ const NOTES_KEY = 'notes';
 
 function query() {
     return storageService.query(NOTES_KEY)
+}
+
+function deleteNote(noteId) {
+    return storageService.remove(NOTES_KEY, noteId)
 }
 
 function youtube_parser(url) {
