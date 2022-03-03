@@ -4,13 +4,13 @@ export default {
     props: ["pinnedNotes", "unPinnedNotes"],
     template: `
         <section class="notes main-layout">
-            <section class="note-list" v-if="pinnedNotes">
+            <section class="note-list pinned-notes" v-if="pinnedNotes">
                 <h4 class="pinned-headline">Pinned</h4>
-                <note-preview v-for="note in pinnedNotes" :key="note.id" :note="note" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote" @note-edited="editNote"/>
+                <note-preview v-for="note in pinnedNotes" :key="note.id" :note="note" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote" @note-edited="editNote" />
             </section>
-            <section class="note-list" v-if="unPinnedNotes">
+            <section class="note-list un-pinned-notes" v-if="unPinnedNotes">
                 <h4 class="pinned-headline">Other</h4>
-                <note-preview v-for="note in unPinnedNotes" :key="note.id" :note="note" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote" @note-edited="editNote"/>
+                <note-preview v-for="note in unPinnedNotes" :key="note.id" :note="note" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote" @note-edited="editNote" />
             </section>
         </section>
     `,

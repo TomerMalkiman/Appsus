@@ -8,7 +8,7 @@ export default {
     props: ["note"],
     template: `
     <section v-if="note" >
-        <section  :style="bgc" class="note">
+        <section draggable="true" :style="bgc" class="note">
             <img @click="deleteNote(note.id)" class="note delete-note" src="../../../../img/keep-icons/delete.png"/>
             <component :is="note.type" :note="note" @todo-done="toggleTodo"/>
             <div class="options">
