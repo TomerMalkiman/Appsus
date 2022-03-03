@@ -28,4 +28,6 @@
 @import 'apps/mail/mail-preview.css';
 @import 'apps/keep/note-preview.css';
 @import 'apps/keep/note-list.css';
+@import 'apps/keep/add-note.css';
+@import 'apps/keep/note-filter.css';
 @import 'apps/keep/keep-app.css'
