@@ -9,7 +9,7 @@ export default {
     template: `
         <mail-filter @filtered="setFilter"></mail-filter>
         <section class="main-layout mails-screen">
-            <mail-nav></mail-nav>
+            <mail-nav @status-changed />
             <mail-list @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
         </section>
         
@@ -29,18 +29,19 @@ export default {
     data() {
         return {
             mails: null,
-            filterBy:null,
-            deletedMails: null
+            filterBy: null,
+            deletedMails: null,
+            currStatus: 'inbox',
         }
     },
     methods: {
-        loadMails(){
+        loadMails() {
             mailService.query()
-            .then(mails => this.mails = mails);
+                .then(mails => this.mails = mails);
         },
-        loadDeletedMails(){
+        loadDeletedMails() {
             mailService.query()
-            .then(deletedMails => this.deletedMails = deletedMails);
+                .then(deletedMails => this.deletedMails = deletedMails);
 
         },
         setFilter(filterBy) {
@@ -48,43 +49,44 @@ export default {
             console.log(this.filterBy)
         },
 
-        toggleRead(mailId){
+        toggleRead(mailId) {
             mailService.toggleRead(mailId)
                 .then(mail => {
                     this.mails.find(mail => mail.id === mailId).isRead = mail.isRead;
-                  })
+                })
         },
-        removeMail(mailId){
+        removeMail(mailId) {
             mailService.remove(mailId)
-                .then( () => {
+                .then(() => {
                     const idx = this.mails.findIndex((mail) => mail.id === mailId);
                     this.deletedMails = this.mails.splice(idx, 1);
                     console.log(this.deletedMails)
 
-                    
+
                 })
         },
-        
+        setStatus(status) {
+            this.status = status
+        }
 
 
     },
     computed: {
         mailsForDisplay() {
+            var mails = this.mails.filter(mail => mail.status === this.currStatus)
             console.log('filtering!')
             if (!this.filterBy) return this.mails;
-            var mails = this.mails;
-            if (this.filterBy.readMail) {
-              mails = mails.filter((mail) => mail.isRead)
-            }
-            if (this.filterBy.unReadMail) {
+            if (this.filterBy.read === 'read') {
+                mails = mails.filter((mail) => mail.isRead)
+            } else if (this.filterBy.read === 'unRead') {
                 mails = mails.filter((mail) => !mail.isRead)
-              }
+            } else return this.mails;
             if (this.filterBy.byName) {
-              let regex = new RegExp(this.filterBy.byName, 'i')
-              mails = mails.filter((mail) => {
-                if (regex.test(mail.subject)) return mail
-                if (regex.test(mail.body)) return mail
-              })
+                let regex = new RegExp(this.filterBy.byName, 'i')
+                mails = mails.filter((mail) => {
+                    if (regex.test(mail.subject)) return mail
+                    if (regex.test(mail.body)) return mail
+                })
             }
             console.log(mails);
             return mails;
@@ -92,4 +94,3 @@ export default {
     },
     unmounted() {},
 }
-

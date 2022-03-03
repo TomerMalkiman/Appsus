@@ -8,6 +8,7 @@ export default {
     props: ["note"],
     template: `
         <section  v-if="note" :style="bgc" class="note">
+            <button @click="deleteNote(note.id)">X</button>
             <component :is="note.type" :note="note"/>
             <div class="options">
                 <input v-model="note.style.backgroundColor" type="color" :id="note.id">
@@ -29,6 +30,9 @@ export default {
     computed: {
         bgc() {
             return `background-color: ${this.note.style.backgroundColor}`
+        },
+        deleteNote(noteId) {
+
         }
     },
     unmounted() {},
