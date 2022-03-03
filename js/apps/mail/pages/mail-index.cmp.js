@@ -15,12 +15,14 @@ export default {
             </section>
             <mail-list v-if="mails" @mark-star="toggleStar" @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
         </section>
+        <add-mail></add-mail>
         
     `,
     components: {
         mailList,
         mailNav,
         mailFilter,
+        addMail
         
 
     },
