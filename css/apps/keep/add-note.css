@@ -24,6 +24,10 @@
     transform: translate(5%, 50%);
 }
 
+.add-note-cmd input:focus-visible {
+    outline: none;
+}
+
 .add-note-types {
     position: absolute;
     right: 0;

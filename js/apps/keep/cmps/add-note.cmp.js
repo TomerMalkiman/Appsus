@@ -46,7 +46,7 @@ export default {
                     type: this.note.type,
                     info: {
                         url: '',
-                        title: '',
+                        title: 'Image',
                     }
                 }
             } else if (this.note.type === 'note-txt') {
@@ -71,7 +71,7 @@ export default {
                     type: this.note.type,
                     info: {
                         url: '',
-                        title: '',
+                        title: 'Video',
                     }
                 }
             }
@@ -84,9 +84,21 @@ export default {
             if (this.note.type === 'note-video') {
                 const regex = new RegExp('^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$');
                 if (!regex.test(this.note.info.url) || !this.note.info.title) {
-                    eventBus.emit('show-msg', { txt: 'Invalid link or no title', type: 'error' })
+                    eventBus.emit('show-msg', { txt: 'Invalid link ', type: 'error' })
                     return
                 }
+            }
+            if (this.note.type === 'note-img' && !this.note.url) {
+                eventBus.emit('show-msg', { txt: 'Insert link', type: 'error' })
+                return
+            }
+            if (this.note.type === 'note-txt' && !this.note.info.txt) {
+                eventBus.emit('show-msg', { txt: 'Insert text', type: 'error' })
+                return
+            }
+            if (this.note.type === 'note-todos' && !this.note.info.label) {
+                eventBus.emit('show-msg', { txt: 'Insert label', type: 'error' })
+                return
             }
             this.$emit('save-note', this.note)
             this.note = {

@@ -9,7 +9,7 @@ export default {
             <note-filter @filter-set="setFilter"/>
             <div class="right-side">
                 <add-note @save-note="saveNote"/>
-                <note-list :unPinnedNotes="unPinnedNotesForDisplay" :pinnedNotes="pinnedNotesForDisplay" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote"/>
+                <note-list :unPinnedNotes="unPinnedNotesForDisplay" :pinnedNotes="pinnedNotesForDisplay" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-edited="editNote" @note-duplicate="duplicateNote" />
             </div>
         </section>
     `,
@@ -41,6 +41,7 @@ export default {
                 .then(note => this.unPinnedNotes.push(note))
         },
         deleteNote(noteId) {
+            console.log(noteId)
             noteService.deleteNote(noteId)
             var pinnedIdx = this.pinnedNotes.findIndex(note => note.id === noteId);
             var unPinnedIdx = this.unPinnedNotes.findIndex(note => note.id === noteId);
@@ -93,6 +94,18 @@ export default {
         },
         setFilter(filterBy) {
             this.filterBy = filterBy
+        },
+        editNote(noteId, newNote) {
+            noteService.editNote(noteId, newNote)
+                .then(note => {
+                    if (note.isPinned) {
+                        var renderedNoteIdx = this.pinnedNotes.findIndex(note => note.id === noteId);
+                        this.pinnedNotes[renderedNoteIdx] = newNote
+                    } else {
+                        var renderedNoteIdx = this.unPinnedNotes.findIndex(note => note.id === noteId);
+                        this.unPinnedNotes[renderedNoteIdx] = newNote
+                    }
+                })
         }
     },
     computed: {

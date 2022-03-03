@@ -58,6 +58,10 @@
     right: 55px;
 }
 
+.note-icon.edit {
+    right: 80px;
+}
+
 .note-icon.pin.pinned {
     transform: rotateZ(-45deg);
 }
@@ -66,4 +70,14 @@
     width: 0;
     opacity: 0;
     pointer-events: none;
+}
+
+.editing-cmd {
+    padding-bottom: 20px;
+}
+
+.editing-cmd input {
+    opacity: 1;
+    width: 100%;
+    pointer-events: auto;
 }

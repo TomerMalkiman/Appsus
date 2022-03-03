@@ -10,6 +10,7 @@ export const noteService = {
     updateBgc,
     toggleTodo,
     duplicateNote,
+    editNote,
 }
 
 const NOTES_KEY = 'notes';
@@ -17,6 +18,14 @@ const NOTES_KEY = 'notes';
 
 function query() {
     return storageService.query(NOTES_KEY)
+}
+
+function editNote(noteId, newNote) {
+    return storageService.get(NOTES_KEY, noteId)
+        .then(note => {
+            note = newNote;
+            return storageService.put(NOTES_KEY, note)
+        })
 }
 
 function deleteNote(noteId) {
@@ -75,7 +84,7 @@ function saveNote(note) {
                 title: note.info.title
             },
             style: {
-                backgroundColor: "#fff"
+                backgroundColor: "#f7f7f7"
             }
         }
     } else if (note.type === 'note-txt') {
@@ -87,7 +96,7 @@ function saveNote(note) {
                 txt: note.info.txt
             },
             style: {
-                backgroundColor: "#ffff"
+                backgroundColor: "#f7f7f7"
             }
         }
     } else if (note.type === 'note-todos') {
@@ -100,7 +109,7 @@ function saveNote(note) {
                 todos: note.info.todos
             },
             style: {
-                backgroundColor: "#fff"
+                backgroundColor: "#f7f7f7"
             }
         }
     } else if (note.type === 'note-img') {
@@ -113,7 +122,7 @@ function saveNote(note) {
                 title: note.info.title
             },
             style: {
-                backgroundColor: "#fff"
+                backgroundColor: "#f7f7f7"
             }
         }
     }
@@ -137,7 +146,7 @@ function _createNotes() {
                             txt: "Fullstack Me Baby!"
                         },
                         style: {
-                            backgroundColor: "#ffff"
+                            backgroundColor: "#f7f7f7"
                         }
                     },
                     {
@@ -152,7 +161,7 @@ function _createNotes() {
                             ],
                         },
                         style: {
-                            backgroundColor: "#fff"
+                            backgroundColor: "#f7f7f7"
                         }
                     },
                     {
@@ -164,7 +173,7 @@ function _createNotes() {
                             title: "Bobi and Me"
                         },
                         style: {
-                            backgroundColor: "#fff"
+                            backgroundColor: "#f7f7f7"
                         }
                     },
                     {
@@ -177,7 +186,7 @@ function _createNotes() {
 
                         },
                         style: {
-                            backgroundColor: "#fff"
+                            backgroundColor: "#f7f7f7"
                         }
                     },
                 ]
