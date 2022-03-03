@@ -5,25 +5,25 @@ import keepApp from './apps/keep/pages/note-index.cmp.js';
 import mailDetails from './apps/mail/pages/mail-details.cmp.js';
 
 const routes = [{
-    path: '/',
-    component: homePage
-},
-{
-    path: '/about',
-    component: aboutPage
-},
-{
-    path: '/mail',
-    component: mailApp,
-},
-{
-    path: '/mail/:mailId',
-    component: mailDetails
-},
-{
-    path: '/notes',
-    component: keepApp
-},
+        path: '/',
+        component: homePage
+    },
+    {
+        path: '/about',
+        component: aboutPage
+    },
+    {
+        path: '/mail',
+        component: mailApp,
+    },
+    {
+        path: '/mail/:mailId',
+        component: mailDetails
+    },
+    {
+        path: '/notes',
+        component: keepApp
+    },
 ];
 
 export const router = VueRouter.createRouter({

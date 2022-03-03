@@ -13,7 +13,7 @@ export default {
             <mail-nav  v-if="mails"  @status-changed="setStatus" :mails="mailsForDisplay" />
             <div v-if="mails">{{unReadMailsDisplay}}</div>
             </section>
-            <mail-list v-if="mails" @mark-star="toggleStar" @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
+            <mail-list v-if="mails" @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
         </section>
         <add-mail></add-mail>
         
@@ -56,13 +56,6 @@ export default {
                     this.mails.find(mail => mail.id === mailId).isRead = mail.isRead;
                 })
         },
-
-        toggleStar(mailId) {
-            mailService.toggleStar(mailId)
-                .then(mail => {
-                    this.mails.find(mail => mail.id === mailId).isStarred = mail.isStarred;
-                })
-        },
         removeMail(mailId) {
             mailService.remove(mailId)
                 .then(() => {
@@ -86,8 +79,7 @@ export default {
         mailsForDisplay() {
             if (this.currStatus === 'starred') {
                 var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isStarred))
-            }
-            else var mails = this.mails.filter(mail => mail.status === this.currStatus)
+            } else var mails = this.mails.filter(mail => mail.status === this.currStatus)
 
             if (!this.filterBy) return mails;
 
@@ -106,7 +98,7 @@ export default {
             }
             return mails;
         },
-      
+
     },
-    unmounted() { },
+    unmounted() {},
 }
