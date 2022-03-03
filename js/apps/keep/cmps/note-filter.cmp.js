@@ -2,6 +2,7 @@ export default {
     // props: [""],
     template: `
         <section>
+            AA
         </section>
     `,
     components: {},

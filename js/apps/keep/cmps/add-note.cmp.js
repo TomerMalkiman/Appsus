@@ -1,24 +1,19 @@
-import { eventBus } from '../../../../services/eventBus-service.js'
+import { eventBus } from '../../../services/eventBus-service.js'
+import { utilService } from '../../../services/util.service.js'
 
 export default {
     template: `
         <section class="add-note">
-            <div class="add-note-types">
-                <img src="../../../../img/keep-icons/text.png" @click="setNote('note-txt')"/>
-                <img src="../../../../img/keep-icons/video.png" @click="setNote('note-video')"/>
-                <img src="../../../../img/keep-icons/image.png" @click="setNote('note-img')"/>
-                <img src="../../../../img/keep-icons/list.png" @click="setNote('note-todos')"/>
-            </div>
-            <div v-if="note.type === 'note-txt'" class="note-input">
-                <input type="text" v-model="note.info.txt" placeholder="Take a note..">
-            </div>
-            <div v-if="note.type === 'note-video'" class="note-input">
-                <input type="text" placeholder="Give me a title" v-model="note.info.title">
-                <input type="text" placeholder="Please Enter Youtube url" v-model="note.info.url">
-            </div>
-            <div v-if="note.type === 'note-img'" class="note-input">
-                <input type="text" placeholder="Give me a title" v-model="note.info.title">
-                <input type="text" placeholder="Please Enter Photo url" v-model="note.info.url">
+            <div class="add-note-cmd">
+                <input v-if="note.type=== 'note-txt'" v-model="note.info.txt" type="text" :placeholder="noteType">
+                <input v-if="note.type === 'note-img' || note.type === 'note-video'" v-model="note.info.url" type="text" :placeholder="noteType">
+                <input v-if="note.type === 'note-todos'" v-model="note.info.label" type="text" :placeholder="noteType">
+                <div class="add-note-types">
+                    <img src="../../../../img/keep-icons/text.png" @click="setNote('note-txt')"/>
+                    <img src="../../../../img/keep-icons/video.png" @click="setNote('note-video')"/>
+                    <img src="../../../../img/keep-icons/image.png" @click="setNote('note-img')"/>
+                    <img src="../../../../img/keep-icons/list.png" @click="setNote('note-todos')"/>
+                </div>
             </div>
             <div v-if="note.type === 'note-todos'" class="note-input">
                 <button @click="addTodo">+</button>
@@ -32,7 +27,7 @@ export default {
     data() {
         return {
             note: {
-                type: null,
+                type: 'note-txt',
                 info: {
                     url: null,
                     title: null,
@@ -40,18 +35,18 @@ export default {
                     todos: null,
                     label: null,
                 }
-            }
+            },
         }
     },
     methods: {
         setNote(type) {
             this.note.type = type
-            if (this.note.type === 'note-img' || this.note.type === 'note-video') {
+            if (this.note.type === 'note-img') {
                 this.note = {
                     type: this.note.type,
                     info: {
                         url: '',
-                        title: '',
+                        title: 'Image',
                     }
                 }
             } else if (this.note.type === 'note-txt') {
@@ -67,14 +62,22 @@ export default {
                     info: {
                         label: "",
                         todos: [
-                            { txt: 'Todo', doneAt: null },
+                            { id: utilService.makeId(), txt: 'Todo', doneAt: null },
                         ],
+                    }
+                }
+            } else if (this.note.type === 'note-video') {
+                this.note = {
+                    type: this.note.type,
+                    info: {
+                        url: '',
+                        title: 'Video',
                     }
                 }
             }
         },
         addTodo() {
-            this.note.info.todos.push({ txt: 'Todo', doneAt: null })
+            this.note.info.todos.push({ id: utilService.makeId(), txt: 'Todo', doneAt: null })
         },
         saveNote() {
             if (this.note.type === 'note-video') {
@@ -85,9 +88,27 @@ export default {
                 }
             }
             this.$emit('save-note', this.note)
-            this.note.type = null;
+            this.note = {
+                type: 'note-txt',
+                info: {
+                    url: null,
+                    title: null,
+                    txt: null,
+                    todos: null,
+                    label: null,
+                }
+
+            }
+        },
+    },
+    computed: {
+        noteType() {
+            if (this.note.type === 'note-txt') return 'Take a note..';
+            if (this.note.type === 'note-video') return 'Enter Youtube URL';
+            if (this.note.type === 'note-img') return 'Enter Image URL';
+            if (this.note.type === 'note-todos') return 'Enter Title';
+
         }
     },
-    computed: {},
     unmounted() {},
 }

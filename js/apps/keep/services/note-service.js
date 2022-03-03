@@ -6,6 +6,9 @@ export const noteService = {
     query,
     saveNote,
     deleteNote,
+    togglePin,
+    updateBgc,
+    toggleTodo,
 }
 
 const NOTES_KEY = 'notes';
@@ -19,6 +22,32 @@ function deleteNote(noteId) {
     return storageService.remove(NOTES_KEY, noteId)
 }
 
+function updateBgc(noteId, bgc) {
+    return storageService.get(NOTES_KEY, noteId)
+        .then(note => {
+            note.style.backgroundColor = bgc;
+            return storageService.put(NOTES_KEY, note)
+        })
+}
+
+function toggleTodo(todoId, noteId) {
+    return storageService.get(NOTES_KEY, noteId)
+        .then(note => {
+            const todo = note.info.todos.find(todo => todo.id === todoId)
+            if (!todo.doneAt) todo.doneAt = Date.now();
+            else todo.doneAt = null
+            return storageService.put(NOTES_KEY, note)
+        })
+}
+
+function togglePin(noteId) {
+    return storageService.get(NOTES_KEY, noteId)
+        .then(note => {
+            note.isPinned = !note.isPinned;
+            return storageService.put(NOTES_KEY, note)
+        })
+}
+
 function youtube_parser(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
@@ -26,7 +55,7 @@ function youtube_parser(url) {
 }
 
 function saveNote(note) {
-    if (note.type === 'note-video' || note.type === 'note-img') {
+    if (note.type === 'note-video') {
         const URL = youtube_parser(note.info.url)
 
         note = {
@@ -66,11 +95,25 @@ function saveNote(note) {
                 backgroundColor: "#fff"
             }
         }
+    } else if (note.type === 'note-img') {
+        note = {
+            id: utilService.makeId(),
+            type: note.type,
+            isPinned: false,
+            info: {
+                url: note.info.url,
+                title: note.info.title
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
     }
     return query()
         .then(notes => {
             notes.push(note)
-            return storageService.put(NOTES_KEY, note)
+            console.log('posting')
+            return storageService.post(NOTES_KEY, note)
         })
 }
 
@@ -96,8 +139,8 @@ function _createNotes() {
                         info: {
                             label: "Get my stuff together",
                             todos: [
-                                { txt: "Driving liscence", doneAt: null },
-                                { txt: "Coding power", doneAt: 187111111 }
+                                { id: utilService.makeId(), txt: "Driving liscence", doneAt: null },
+                                { id: utilService.makeId(), txt: "Coding power", doneAt: 187111111 }
                             ],
                         },
                         style: {

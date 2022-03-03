@@ -1,7 +1,5 @@
 .note {
-    border: 1px solid black;
-    border-radius: 1rem;
-    padding: 1rem;
+    padding: 1rem .5rem;
     display: flex;
     gap: 5px;
     flex-direction: column;
@@ -9,16 +7,44 @@
     justify-content: space-around;
     position: relative;
     height: fit-content;
+    box-shadow: 0 0 10px;
+    transition: transform .3s;
+}
+
+.note:hover {
+    z-index: 1;
+    transform: scale(1.1);
 }
 
 .note img {
     max-width: 150px;
 }
 
-.note-icon {
-    width: 20px;
+.note .delete-note {
     position: absolute;
-    bottom: 0
+    top: 0;
+    right: 5px;
+    transform: translateY(-100%);
+    background: none;
+    border-radius: 50%;
+}
+
+.note-icon {
+    width: 15px;
+    position: absolute;
+    bottom: 5px;
+}
+
+.note-icon.paintbrush {
+    right: 5px;
+}
+
+.note-icon.pin {
+    right: 30px;
+}
+
+.note-icon.pin.pinned {
+    transform: rotateZ(-45deg);
 }
 
 .note input {
