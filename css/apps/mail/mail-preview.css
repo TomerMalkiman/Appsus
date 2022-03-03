@@ -15,7 +15,8 @@
 
 .mail-preview:hover{
     cursor: pointer;
-    border: 2px solid rgb(63, 77, 170);
+    border: 1px solid rgb(171, 172, 179);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
 
 }
 
@@ -45,6 +46,7 @@
     width: 10%;
     position: absolute;
     right: 0;
+    transform: translateX(30%);
 }
 
 /*mail-screen*/
@@ -70,7 +72,7 @@
     padding: 10px;
 }
 
-.mail-nav>*:not(:first-child):hover{
+.mail-nav>*:not(:first-child,:last-child):hover{
     background-color: lightgrey;
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
@@ -103,5 +105,26 @@
  padding: 15px;
  border-bottom: 1px solid black;
  background-color: var(--clr3);
+}
+
+.precantage{
+position: relative;
+background-color: lightcyan;
+}
+
+.precantage-color{
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+}
+
+.mail-remove-btn{
+ padding: 3px;
+ margin-right: 4px;
+}
+
+.mail-read-btn{
+    padding: 3px;
 
 }

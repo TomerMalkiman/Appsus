@@ -3,7 +3,7 @@ import { utilService } from "../../../services/util.service.js";
 
 export const mailService = {
     _createMails,
-    _createDeletedMails,
+    deleteMail,
     query,
     toggleRead,
     remove
@@ -15,7 +15,7 @@ export const loggedinUser = {
    }
 
 const MAILS_KEY = 'mails'
-const DELETED_MAILS_KEY = 'deleted'
+// const DELETED_MAILS_KEY = 'deleted'
 
 
 function getUser(){
@@ -40,50 +40,59 @@ function remove(mailId) {
     return storageService.remove(MAILS_KEY, mailId);
 }
 
-function _createDeletedMails(){
+function deleteMail(mailId){
     return query()
-        .then(deletedMails => {
-            console.log(deletedMails)
-            if(!deletedMails || !deletedMails.length){
-                deletedMails = [{
-                    
-                        id: utilService.makeId(),
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
-                        isRead: true,
-                        isStarred: true,
-                        sentAt: 1611117798347,
-                        to: 'momo@momo.com',
-                        from: 'Mike'
-                    },
-                    {
-                        id: utilService.makeId(),
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
-                        isRead: false,
-                        isStarred: true,
-                        sentAt: 1613214378220,
-                        to: 'momo@momo.com',
-                        from: 'David'
-                    },
-                    {
-                        id: utilService.makeId(),
-                        subject: 'hello!',
-                        body: 'Would love to see you Today',
-                        isRead: true,
-                        isStarred: false,
-                        sentAt: 1611224978098,
-                        to: 'momo@momo.com',
-                        from: 'Moshe'
-
-
-                }]
-                storageService.postMany(DELETED_MAILS_KEY, deletedMails)
-            }
-            return deletedMails;
-        })
-
+    .then( mails=>{
+        var currMail = mails.find(mail => mail.id === mailId);
+        currMail.status = 'deleted';
+        return storageService.put(MAILS_KEY,currMail);            
+    })
 }
+
+// function _createDeletedMails(){
+//     return query()
+//         .then(deletedMails => {
+//             console.log(deletedMails)
+//             if(!deletedMails || !deletedMails.length){
+//                 deletedMails = [{
+                    
+//                         id: utilService.makeId(),
+//                         subject: 'Miss you!',
+//                         body: 'Would love to catch up sometimes',
+//                         isRead: true,
+//                         isStarred: true,
+//                         sentAt: 1611117798347,
+//                         to: 'momo@momo.com',
+//                         from: 'Mike'
+//                     },
+//                     {
+//                         id: utilService.makeId(),
+//                         subject: 'Miss you!',
+//                         body: 'Would love to catch up sometimes',
+//                         isRead: false,
+//                         isStarred: true,
+//                         sentAt: 1613214378220,
+//                         to: 'momo@momo.com',
+//                         from: 'David'
+//                     },
+//                     {
+//                         id: utilService.makeId(),
+//                         subject: 'hello!',
+//                         body: 'Would love to see you Today',
+//                         isRead: true,
+//                         isStarred: false,
+//                         sentAt: 1611224978098,
+//                         to: 'momo@momo.com',
+//                         from: 'Moshe'
+
+
+//                 }]
+//                 storageService.postMany(DELETED_MAILS_KEY, deletedMails)
+//             }
+//             return deletedMails;
+//         })
+
+
 
 function _createMails() {
     return query()
@@ -92,7 +101,8 @@ function _createMails() {
             if (!mails || !mails.length) {
                 mails = [{
                         id: utilService.makeId(),
-                        subject: 'Miss you!',
+                        status : 'inbox',
+                        subject: 'Hello!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         isStarred: true,
@@ -102,7 +112,8 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
-                        subject: 'Miss you!',
+                        status : 'inbox',
+                        subject: 'Sprint 3!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         isStarred: true,
@@ -112,7 +123,8 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
-                        subject: 'Miss you!',
+                        status : 'inbox',
+                        subject: 'Why its not working!!!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
                         isStarred: false,
@@ -122,8 +134,9 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
+                        status : 'inbox',
+                        subject: 'HELP!',
+                        body: 'Im stuckk',
                         isRead: false,
                         isStarred: false,
                         sentAt: 1613214778220,
@@ -132,8 +145,9 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
+                        body: 'lets meet',
                         isRead: true,
                         isStarred: true,
                         sentAt: 1611222778098,
@@ -142,6 +156,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
@@ -152,6 +167,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
@@ -162,6 +178,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
@@ -172,6 +189,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
@@ -182,6 +200,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes, talk with me baby!',
                         isRead: false,
@@ -192,11 +211,11 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
                         isStarred: false,
-
                         sentAt: 1601312768173,
                         to: 'momo@momo.com',
                         from: 'Tomer'

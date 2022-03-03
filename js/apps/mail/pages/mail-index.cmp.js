@@ -7,17 +7,21 @@ import mailFilter from "../cmps/mail-filter.cmp.js"
 export default {
     // props: [""],
     template: `
-        <mail-filter @filtered="setFilter"></mail-filter>
+        <mail-filter @filtered="setFilter" ></mail-filter>
         <section class="main-layout mails-screen">
-            <mail-nav @status-changed />
-            <mail-list @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
+            <section class="nav-container">
+            <mail-nav  v-if="mails"  @status-changed="setStatus" :mails="mailsForDisplay" />
+            <div v-if="mails">{{unReadMailsDisplay}}</div>
+            </section>
+            <mail-list v-if="mails" @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
         </section>
         
     `,
     components: {
         mailList,
         mailNav,
-        mailFilter
+        mailFilter,
+        
 
     },
     created() {
@@ -30,8 +34,8 @@ export default {
         return {
             mails: null,
             filterBy: null,
-            deletedMails: null,
             currStatus: 'inbox',
+            readCounter: 0
         }
     },
     methods: {
@@ -39,14 +43,9 @@ export default {
             mailService.query()
                 .then(mails => this.mails = mails);
         },
-        loadDeletedMails() {
-            mailService.query()
-                .then(deletedMails => this.deletedMails = deletedMails);
 
-        },
         setFilter(filterBy) {
             this.filterBy = filterBy;
-            console.log(this.filterBy)
         },
 
         toggleRead(mailId) {
@@ -59,28 +58,36 @@ export default {
             mailService.remove(mailId)
                 .then(() => {
                     const idx = this.mails.findIndex((mail) => mail.id === mailId);
-                    this.deletedMails = this.mails.splice(idx, 1);
-                    console.log(this.deletedMails)
-
-
+                    this.mails.splice(idx, 1);
+                })
+        },
+        deleteMail(mailId) {
+            mailService.deleteMail(mailId)
+                .then(mail => {
+                    this.mails.find(mail => mail.id === mailId).status = mail.status;
                 })
         },
         setStatus(status) {
-            this.status = status
+            this.currStatus = status
         }
 
 
     },
     computed: {
         mailsForDisplay() {
-            var mails = this.mails.filter(mail => mail.status === this.currStatus)
-            console.log('filtering!')
-            if (!this.filterBy) return this.mails;
+            if (this.currStatus === 'starred') {
+                var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isStarred))
+            }
+            else var mails = this.mails.filter(mail => mail.status === this.currStatus)
+
+            if (!this.filterBy) return mails;
+
             if (this.filterBy.read === 'read') {
                 mails = mails.filter((mail) => mail.isRead)
             } else if (this.filterBy.read === 'unRead') {
                 mails = mails.filter((mail) => !mail.isRead)
-            } else return this.mails;
+            } else mails = this.mails;
+
             if (this.filterBy.byName) {
                 let regex = new RegExp(this.filterBy.byName, 'i')
                 mails = mails.filter((mail) => {
@@ -88,9 +95,9 @@ export default {
                     if (regex.test(mail.body)) return mail
                 })
             }
-            console.log(mails);
             return mails;
-        }
+        },
+      
     },
-    unmounted() {},
+    unmounted() { },
 }

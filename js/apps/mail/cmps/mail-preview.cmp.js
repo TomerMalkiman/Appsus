@@ -3,33 +3,37 @@ export default {
   props: ["mail"],
   template: `
       
-        <section :style="bgc" class="mail-preview">
+        <section :style="bgc"  @mouseover="isHover = false"  @mouseleave="isHover = true"
+         class="mail-preview">
         <router-link :to="'/mail/'+mail.id">
-          <div :style="isStarred">☆</div>
+          <div :style="isStarred" ><font-awesome-icon icon="fas fa-star" />☆</div>
             <div :style="isRead" class="mail-sender-name">{{mail.from}}</div>
             <div :style="isRead" class="mail-subject">{{mail.subject}}</div>
             <div class="mail-content">{{mailContent}}</div>
-            <div :style="isRead" class="mail-date">{{sentAt}}</div>
+            <div v-if="isHover":style="isRead" class="mail-date">{{sentAt}}</div>
             <div class="actions-btns">
-                <button class="mail-remove-btn btn" @click.native.prevent="remove(mail.id)">X</button>
-                <button class="mail-read-btn btn" @click.native.prevent="toggleRead(mail.id)">{{isReadText}}</button>
+                <button class="mail-remove-btn btn" @click.native.prevent="remove(mail.id)"><i class=" fa-solid fa-trash-can"></i></button>
+                <button class="mail-read-btn btn" @click.native.prevent="toggleRead(mail.id)"><i :class="isReadText"></i></button>
             </div>
             </router-link>
         </section>
-      
-
+        
+       
+   
 
     `,
   components: {},
   created() { },
   data() {
-    return {}
+    return {
+      isHover: true
+    }
   },
   methods: {
-    toggleRead(mailId, ev) {
+    toggleRead(mailId) {
       this.$emit('toggle-read', mailId)
     },
-    remove(mailId, ev) {
+    remove(mailId) {
       this.$emit('remove', mailId);
     },
 
@@ -47,17 +51,17 @@ export default {
         this.mail.subject;
 
     },
-  
+
 
     bgc() {
       return this.mail.isRead ? `background-color : #ECECEC` : '';
     },
     isRead() {
-      return this.mail.isRead ? `font-weight: bold` : '';
+      return this.mail.isRead ? '' : `font-weight: bold`;
     },
 
-    isReadText(){
-      return this.mail.isRead ? `unRead` : 'Read';
+    isReadText() {
+      return this.mail.isRead ? `fa-solid fa-square-envelope` : 'fa-solid fa-envelope-open';
     },
     // isStarred(){
     //   return this.mail.isStarred ? `` : '' ;
@@ -73,7 +77,7 @@ export default {
       if (timeDiff < 86400000) {// A day
         // console.log('Today!')
         return mailDate.getHours() + ':' + ((mailDate.getMinutes() < 10) ?
-          '0' + (mailDate.getMinutes()+1) : mailDate.getMinutes());
+          '0' + (mailDate.getMinutes() + 1) : mailDate.getMinutes());
 
       }
       else if (timeDiff > 31556926000) {//31556926000 is a year in timeStamp

@@ -19,7 +19,9 @@ export default {
     },
     created() { },
     data() {
-        return {}
+        return {
+            currMail: null
+        }
     },
     methods: {
         toggleRead(mailId) {
@@ -27,8 +29,9 @@ export default {
 
         },
         remove(mailId) {
-            this.$emit('remove', mailId);
-
+            this.currMail = this.mails.find(mail => mail.id === mailId);
+            if(this.currMail.status === 'deleted')  this.$emit('remove', mailId);
+            else this.$emit('delete',mailId);
         },
     },
     computed: {},
