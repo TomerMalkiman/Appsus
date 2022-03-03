@@ -3,6 +3,7 @@
     display: flex;
     gap: 5px;
     flex-direction: column;
+    border-radius: .5em;
     align-items: center;
     justify-content: space-around;
     position: relative;
@@ -38,6 +39,11 @@
     position: absolute;
     bottom: 5px;
     cursor: pointer;
+    display: none;
+}
+
+.note:hover .note-icon {
+    display: block;
 }
 
 .note-icon.paintbrush {

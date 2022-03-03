@@ -2,8 +2,8 @@ import { mailService } from "../services/mail.service.js"
 // import mailNav from "../cmps/mail-nav.cmp.js";
 
 export default {
-//   props: ["mail"],
-  template: `
+    //   props: ["mail"],
+    template: `
 
         <!-- <mail-nav  v-if="mails"  @status-changed="setStatus" :mails="mailsForDisplay" />    -->
         <section v-if="mail" class="mail-details main-layout">
@@ -27,32 +27,32 @@ export default {
         </section>
           
     `,
-  components: {
-    // mailNav
-  },
-  created() {
-    const id = this.$route.params.mailId;
-    mailService.getMail(id)
-        .then(mail=> this.mail = mail)
+    components: {
+        // mailNav
+    },
+    created() {
+        const id = this.$route.params.mailId;
+        mailService.getMail(id)
+            .then(mail => this.mail = mail)
 
-   mailService._createMails()
-        .then(mails => {
-            this.mails = mails})    
-  },
-  data() {
-    return {
-      mail: null,
-      // mails: null
-    }
-  },
-  methods: {
-    returnInbox(){
-      this.$router.push(`/mail`)
-    }
-  },
-  computed: {},
-  unmounted() {
-      
-  },
+        mailService._createMails()
+            .then(mails => {
+                this.mails = mails
+            })
+    },
+    data() {
+        return {
+            mail: null,
+            // mails: null
+        }
+    },
+    methods: {
+        returnInbox() {
+            this.$router.push(`/mail`)
+        }
+    },
+    computed: {},
+    unmounted() {
+
+    },
 }
-
