@@ -9,14 +9,14 @@ export default {
                 <input ref="noteInput" v-if="note.type === 'note-img' || note.type === 'note-video'" v-model="note.info.url" type="text" :placeholder="noteType">
                 <input ref="noteInput" v-if="note.type === 'note-todos'" v-model="note.info.label" type="text" :placeholder="noteType">
                 <div class="add-note-types">
-                    <img :style="note.type=== 'note-txt' ? 'opacity: 1' : ''" src="./img/keep-icons/text.png" @click="setNote('note-txt')"/>
+                    <img :style="note.type=== 'note-txt' ? 'opacity: 1' : ''" src="../../../../img/keep-icons/text.png" @click="setNote('note-txt')"/>
                     <img :style="note.type=== 'note-video' ? 'opacity: 1' : ''" src="../../../../img/keep-icons/video.png" @click="setNote('note-video')"/>
                     <img :style="note.type=== 'note-img' ? 'opacity: 1' : ''" src="../../../../img/keep-icons/image.png" @click="setNote('note-img')"/>
                     <img :style="note.type=== 'note-todos' ? 'opacity: 1' : ''" src="../../../../img/keep-icons/list.png" @click="setNote('note-todos')"/>
                 </div>
             </div>
             <div v-if="note.type === 'note-todos'" class="note-input">
-                <img class="add-todo-btn" src="./img/keep-icons/plus.png" @click="addTodo" />
+                <img class="add-todo-btn" src="../../../../img/keep-icons/plus.png" @click="addTodo" />
                 <input v-for="todo in note.info.todos" type="text" v-model="todo.txt">
             </div>
             <button v-if="note.type" class="add-note-save" @click="saveNote">Save</button>
@@ -97,7 +97,7 @@ export default {
                 return
             }
             if (this.note.type === 'note-todos' && !this.note.info.label) {
-                eventBus.emit('show-msg', { txt: 'Insert label', type: 'error' })
+                eventBus.emit('show-msg', { txt: 'Insert Label', type: 'error' })
                 return
             }
             this.$emit('save-note', this.note)
