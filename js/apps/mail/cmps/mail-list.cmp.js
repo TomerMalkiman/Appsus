@@ -6,7 +6,7 @@ export default {
         <section class="mail-list">
             <ul class="clean-list">
                 <li v-for="mail in mails" :key="mail.id">
-                        <mail-preview @remove="remove(mail.id)" @toggle-read="toggleRead(mail.id)" :mail="mail"/>
+                        <mail-preview  @mark-star="toggleStar(mail.id)" @remove="remove(mail.id)" @toggle-read="toggleRead(mail.id)" :mail="mail"/>
                 </li>
 
             </ul>
@@ -26,6 +26,10 @@ export default {
     methods: {
         toggleRead(mailId) {
             this.$emit('toggle-read', mailId)
+
+        },
+        toggleStar(mailId) {
+            this.$emit('mark-star', mailId)
 
         },
         remove(mailId) {

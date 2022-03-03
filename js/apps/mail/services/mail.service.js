@@ -5,7 +5,9 @@ export const mailService = {
     _createMails,
     deleteMail,
     query,
+    getMail,
     toggleRead,
+    toggleStar,
     remove
 }
 
@@ -18,8 +20,8 @@ const MAILS_KEY = 'mails'
 // const DELETED_MAILS_KEY = 'deleted'
 
 
-function getUser(){
-
+function getMail(mailId){
+    return storageService.get(MAILS_KEY,mailId);
 }
 
 function query() {
@@ -31,6 +33,16 @@ function toggleRead(mailId){
         .then( mails=>{
             var currMail = mails.find(mail => mail.id === mailId);
             currMail.isRead = !currMail.isRead;
+            return storageService.put(MAILS_KEY,currMail);            
+
+        })
+}
+
+function toggleStar(mailId){
+    return query()
+        .then( mails=>{
+            var currMail = mails.find(mail => mail.id === mailId);
+            currMail.isStarred = !currMail.isStarred;
             return storageService.put(MAILS_KEY,currMail);            
 
         })

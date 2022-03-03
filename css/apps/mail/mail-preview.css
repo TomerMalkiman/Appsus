@@ -128,3 +128,36 @@ background-color: lightcyan;
     padding: 3px;
 
 }
+
+/*Mail-details*/
+
+.mail-details{
+    /* display: flex; */
+    margin: 10px;
+    /* flex-direction: column; */
+    font-size: 1.1rem;
+    
+}
+
+.mail-details-btns{
+    padding: 10px;
+  
+}
+
+.mail-details-btns .return-btn{
+    padding: 10px;
+}
+
+.sender-details{
+    display: flex;
+    gap :10px
+}
+
+.sender-img{
+    padding-top: 20px;
+}
+
+.star{
+    color: gold;
+}
+

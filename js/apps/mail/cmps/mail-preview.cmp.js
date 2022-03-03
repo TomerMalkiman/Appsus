@@ -6,7 +6,8 @@ export default {
         <section :style="bgc"  @mouseover="isHover = false"  @mouseleave="isHover = true"
          class="mail-preview">
         <router-link :to="'/mail/'+mail.id">
-          <div :style="isStarred" ><font-awesome-icon icon="fas fa-star" />☆</div>
+          <div :style="isStarred" ><i @click.native.prevent="toggleStar(mail.id)" 
+          :class="isStarred" aria-hidden="true"></i></div>
             <div :style="isRead" class="mail-sender-name">{{mail.from}}</div>
             <div :style="isRead" class="mail-subject">{{mail.subject}}</div>
             <div class="mail-content">{{mailContent}}</div>
@@ -36,6 +37,10 @@ export default {
     remove(mailId) {
       this.$emit('remove', mailId);
     },
+    toggleStar(mailId){
+      this.$emit('mark-star',mailId)
+
+    }
 
   },
   computed: {
@@ -63,10 +68,9 @@ export default {
     isReadText() {
       return this.mail.isRead ? `fa-solid fa-square-envelope` : 'fa-solid fa-envelope-open';
     },
-    // isStarred(){
-    //   return this.mail.isStarred ? `` : '' ;
-
-    // },
+    isStarred(){
+      return this.mail.isStarred ? 'fa-solid fa-star star' : 'fa fa-star-o' ;
+    },
 
     sentAt() {
       var mailDate = new Date(this.mail.sentAt);
@@ -105,15 +109,3 @@ export default {
 
 
 
-
-// template: `
-// <section class="img-preview-conatiner">
-//     <img :src="bookImgUrl">
-// </section>
-
-// <section class="book-title">
-//     <h2> {{book.title}}</h2>
-// </section>
-
-// <p><span class="detail-title">Author :</span> {{getAuthors}}</p>
-// <p><span class="detail-title">Price :</span>  {{book.listPrice.amount}}<span >{{getCurrencySign}}</span> </p>
