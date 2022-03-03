@@ -1,6 +1,6 @@
 /* Main header */
 
-.app-header{
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,6 +10,6 @@
     box-shadow: 0 0 10px;
 }
 
-.app-header .nav-bar>*{
+.app-header .nav-bar>* {
     padding: 5px;
 }

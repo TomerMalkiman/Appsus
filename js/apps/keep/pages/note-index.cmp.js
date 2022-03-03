@@ -5,10 +5,12 @@ import noteFilter from "../cmps/note-filter.cmp.js"
 
 export default {
     template: `
-        <section v-if="pinnedNotes || unPinnedNotes" class="main-layout">
-            <add-note @save-note="saveNote"/>
-            <note-filter/>
-            <note-list :unPinnedNotes="unPinnedNotes" :pinnedNotes="pinnedNotes" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo"/>
+        <section v-if="pinnedNotes || unPinnedNotes" class="main-keep-app main-layout">
+            <note-filter @filter-set="setFilter"/>
+            <div class="right-side">
+                <add-note @save-note="saveNote"/>
+                <note-list :unPinnedNotes="unPinnedNotesForDisplay" :pinnedNotes="pinnedNotesForDisplay" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote"/>
+            </div>
         </section>
     `,
     components: {
@@ -28,8 +30,8 @@ export default {
             pinnedNotes: null,
             unPinnedNotes: null,
             filterBy: {
-                type: 'All',
-
+                type: 'all',
+                txt: '',
             }
         }
     },
@@ -49,7 +51,6 @@ export default {
             }
         },
         togglePin(noteId) {
-            console.log(noteId)
             noteService.togglePin(noteId)
             var pinnedIdx = this.pinnedNotes.findIndex(note => note.id === noteId);
             var unPinnedIdx = this.unPinnedNotes.findIndex(note => note.id === noteId);
@@ -83,7 +84,58 @@ export default {
 
                 })
         },
+        duplicateNote(noteId) {
+            noteService.duplicateNote(noteId)
+                .then(note => {
+                    if (note.isPinned) this.pinnedNotes.push(note)
+                    else this.unPinnedNotes.push(note)
+                })
+        },
+        setFilter(filterBy) {
+            this.filterBy = filterBy
+        }
     },
-    computed: {},
+    computed: {
+        pinnedNotesForDisplay() {
+            return this.pinnedNotes.filter(note => {
+                let regex = new RegExp(this.filterBy.txt, 'i')
+                if (this.filterBy.type === 'all') {
+                    if (note.type === 'note-img' || note.type === 'note-video') return note
+                    if (note.type === 'note-txt') {
+                        if (regex.test(note.info.txt)) return note
+                    }
+                    if (note.type === 'note-todos') {
+                        if (regex.test(note.info.label)) return note
+                    }
+                } else {
+                    if (this.filterBy.type === note.type) {
+                        if (this.filterBy.type === 'note-txt' && regex.test(note.info.txt)) return note;
+                        if (this.filterBy.type === 'note-todos' && regex.test(note.info.label)) return note;
+                        if (note.type === 'note-img' || note.type === 'note-video') return note
+                    }
+                }
+            })
+        },
+        unPinnedNotesForDisplay() {
+            return this.unPinnedNotes.filter(note => {
+                let regex = new RegExp(this.filterBy.txt, 'i')
+                if (this.filterBy.type === 'all') {
+                    if (note.type === 'note-img' || note.type === 'note-video') return note
+                    if (note.type === 'note-txt') {
+                        if (regex.test(note.info.txt)) return note
+                    }
+                    if (note.type === 'note-todos') {
+                        if (regex.test(note.info.label)) return note
+                    }
+                } else {
+                    if (this.filterBy.type === note.type) {
+                        if (this.filterBy.type === 'note-txt' && regex.test(note.info.txt)) return note;
+                        if (this.filterBy.type === 'note-todos' && regex.test(note.info.label)) return note;
+                        if (note.type === 'note-img' || note.type === 'note-video') return note
+                    }
+                }
+            })
+        }
+    },
     unmounted() {},
 }

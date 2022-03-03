@@ -9,6 +9,7 @@ export const noteService = {
     togglePin,
     updateBgc,
     toggleTodo,
+    duplicateNote,
 }
 
 const NOTES_KEY = 'notes';
@@ -20,6 +21,13 @@ function query() {
 
 function deleteNote(noteId) {
     return storageService.remove(NOTES_KEY, noteId)
+}
+
+function duplicateNote(noteId) {
+    return storageService.get(NOTES_KEY, noteId)
+        .then(note => {
+            return storageService.post(NOTES_KEY, note)
+        })
 }
 
 function updateBgc(noteId, bgc) {

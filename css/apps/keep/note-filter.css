@@ -1,0 +1,40 @@
+.note-filter {
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 5px;
+    overflow: hidden;
+}
+
+.note-filter nav {
+    width: 100%;
+}
+
+.note-filter nav>* {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding: 8px;
+    cursor: pointer;
+    transform: translateX(-5%);
+}
+
+.note-filter nav>*:hover {
+    background-color: var(--clr3);
+}
+
+.note-filter nav div:last-child {
+    border: none;
+    margin-top: 20px;
+}
+
+.note-filter nav div:last-child:hover {
+    background-color: white;
+    cursor: default;
+}
+
+.note-filter img {
+    width: 30px;
+    margin-right: 5px;
+}
