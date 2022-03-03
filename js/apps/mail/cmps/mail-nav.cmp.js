@@ -6,10 +6,10 @@ export default {
           <section>
               <nav class="mail-nav">
                   <button class="compose-btn">Compose</button>
-                  <div class="inbox">Inbox</div>
-                  <div class="starred">Starred</div>
-                  <div class="sent-mails">Sent</div>
-                  <div class="deleted-mails">Deleted</div>
+                  <div @click="setStatus('inbox')" class="inbox">Inbox</div>
+                  <div @click="setStatus('starred')" class="starred">Starred</div>
+                  <div @click="setStatus('sent-mails')" class="sent-mails">Sent</div>
+                  <div @click="setStatus('deleted-mails')" class="deleted-mails">Deleted</div>
                   <!-- <unread-counter></unread-counter> -->
               </nav>
           </section>
@@ -19,9 +19,13 @@ export default {
     },
     created() {},
     data() {
-      return {}
+        return {}
     },
-    methods: {},
+    methods: {
+        setStatus(status) {
+            this.$emit('status-changed', status)
+        }
+    },
     computed: {},
     unmounted() {},
-  }
+}
