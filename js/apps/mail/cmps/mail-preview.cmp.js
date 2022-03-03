@@ -2,18 +2,21 @@
 export default {
   props: ["mail"],
   template: `
-        <router-link :to="'/mail/'+mail.id">
+      
         <section :style="bgc" class="mail-preview">
+        <router-link :to="'/mail/'+mail.id">
+          <div :style="isStarred">☆</div>
             <div :style="isRead" class="mail-sender-name">{{mail.from}}</div>
             <div :style="isRead" class="mail-subject">{{mail.subject}}</div>
             <div class="mail-content">{{mailContent}}</div>
             <div :style="isRead" class="mail-date">{{sentAt}}</div>
             <div class="actions-btns">
-                <button class="mail-remove-btn btn" @click="remove(mail.id)">X</button>
-                <button class="mail-read-btn btn" @click="toggleRead(mail.id)">Read</button>
+                <button class="mail-remove-btn btn" @click.native.prevent="remove(mail.id)">X</button>
+                <button class="mail-read-btn btn" @click.native.prevent="toggleRead(mail.id)">{{isReadText}}</button>
             </div>
+            </router-link>
         </section>
-       </router-link>
+      
 
 
     `,
@@ -44,15 +47,22 @@ export default {
         this.mail.subject;
 
     },
+  
 
     bgc() {
-      return this.mail.isRead ? `background-color : lightgray` : '';
+      return this.mail.isRead ? `background-color : #ECECEC` : '';
     },
     isRead() {
       return this.mail.isRead ? `font-weight: bold` : '';
     },
 
+    isReadText(){
+      return this.mail.isRead ? `unRead` : 'Read';
+    },
+    // isStarred(){
+    //   return this.mail.isStarred ? `` : '' ;
 
+    // },
 
     sentAt() {
       var mailDate = new Date(this.mail.sentAt);
@@ -61,15 +71,15 @@ export default {
       // console.log('mailDate', mailDate)
       // console.log('timeDiff', timeDiff)
       if (timeDiff < 86400000) {// A day
-        console.log('Today!')
+        // console.log('Today!')
         return mailDate.getHours() + ':' + ((mailDate.getMinutes() < 10) ?
-          '0' + mailDate.getMinutes() : mailDate.getMinutes());
+          '0' + (mailDate.getMinutes()+1) : mailDate.getMinutes());
 
       }
       else if (timeDiff > 31556926000) {//31556926000 is a year in timeStamp
-        console.log('befor a year!')
-        console.log(mailDate)
-        console.log(mailDate.getDay(), mailDate.getMonth())
+        // console.log('befor a year!')
+        // console.log(mailDate)
+        // console.log(mailDate.getDay(), mailDate.getMonth())
         return mailDate.getDay() + '/'
           + (mailDate.getMonth() + 1) + '/'
           + mailDate.getFullYear()

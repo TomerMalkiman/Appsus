@@ -51,6 +51,7 @@ function _createDeletedMails(){
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
+                        isStarred: true,
                         sentAt: 1611117798347,
                         to: 'momo@momo.com',
                         from: 'Mike'
@@ -60,6 +61,7 @@ function _createDeletedMails(){
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: true,
                         sentAt: 1613214378220,
                         to: 'momo@momo.com',
                         from: 'David'
@@ -69,6 +71,7 @@ function _createDeletedMails(){
                         subject: 'hello!',
                         body: 'Would love to see you Today',
                         isRead: true,
+                        isStarred: false,
                         sentAt: 1611224978098,
                         to: 'momo@momo.com',
                         from: 'Moshe'
@@ -92,6 +95,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: true,
                         sentAt: 1611237578675,
                         to: 'momo@momo.com',
                         from: 'Tomer'
@@ -101,6 +105,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: true,
                         sentAt: 1612345675457,
                         to: 'momo@momo.com',
                         from: 'Ben'
@@ -110,6 +115,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
+                        isStarred: false,
                         sentAt: 1611117778347,
                         to: 'momo@momo.com',
                         from: 'Shifra'
@@ -119,6 +125,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: false,
                         sentAt: 1613214778220,
                         to: 'momo@momo.com',
                         from: 'Yankle'
@@ -128,6 +135,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
+                        isStarred: true,
                         sentAt: 1611222778098,
                         to: 'momo@momo.com',
                         from: 'David'
@@ -137,6 +145,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
+                        isStarred: false,
                         sentAt: 1601213718398,
                         to: 'momo@momo.com',
                         from: 'Tom'
@@ -146,6 +155,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: true,
                         sentAt: 1611947728457,
                         to: 'momo@momo.com',
                         from: 'Amir'
@@ -155,6 +165,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: true,
                         sentAt: 1612314678290,
                         to: 'momo@momo.com',
                         from: 'Tal'
@@ -164,6 +175,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: false,
                         sentAt: 1646233550000,
                         to: 'momo@momo.com',
                         from: 'Tomer'
@@ -173,6 +185,7 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes, talk with me baby!',
                         isRead: false,
+                        isStarred: false,
                         sentAt: 1613138798220,
                         to: 'momo@momo.com',
                         from: 'Tomer'
@@ -182,6 +195,8 @@ function _createMails() {
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: false,
+                        isStarred: false,
+
                         sentAt: 1601312768173,
                         to: 'momo@momo.com',
                         from: 'Tomer'

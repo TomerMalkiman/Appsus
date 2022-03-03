@@ -1,9 +1,10 @@
-import { mailService } from "../services/mail.service.js"
+
 
 export default {
-//   props: ["mail"],
+  // props: [""],
   template: `
         <section>
+            
         </section>
     `,
   components: {},
@@ -13,7 +14,5 @@ export default {
   },
   methods: {},
   computed: {},
-  unmounted() {
-      
-  },
+  unmounted() {},
 }

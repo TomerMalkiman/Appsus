@@ -22,11 +22,11 @@ export default {
         return {}
     },
     methods: {
-        toggleRead(mailId, ev) {
+        toggleRead(mailId) {
             this.$emit('toggle-read', mailId)
 
         },
-        remove(mailId, ev) {
+        remove(mailId) {
             this.$emit('remove', mailId);
 
         },
