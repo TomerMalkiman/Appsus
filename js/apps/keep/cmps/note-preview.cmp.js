@@ -9,14 +9,14 @@ export default {
     template: `
     <section v-if="note" >
         <section draggable="true" :style="bgc" class="note">
-            <img @click="deleteNote(note.id)" class="note delete-note" src="../../../../img/keep-icons/delete.png"/>
+            <img @click="deleteNote(note.id)" class="note delete-note" src="img/keep-icons/delete.png"/>
             <component :is="note.type" :note="note" @todo-done="toggleTodo"/>
             <div class="options">
                 <input v-model="note.style.backgroundColor" @input="updateBgc(note.id)" type="color" :id="note.id">
-                <label :for="note.id"><img class="note-icon paintbrush" src="../../../../img/keep-icons/paintbrush.png" /></label>
-                <img @click="togglePin(note.id)" class="note-icon pin" :class="isPinned" src="../../../../img/keep-icons/pin.png" />
-                <img @click="duplicateNote(note.id)" class="note-icon duplicate" src="../../../../img/keep-icons/duplicate.png" />
-                <img @click="openEditor(note.id)" class="note-icon edit" src="../../../../img/keep-icons/edit.png" />
+                <label :for="note.id"><img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" /></label>
+                <img @click="togglePin(note.id)" class="note-icon pin" :class="isPinned" src="img/keep-icons/pin.png" />
+                <img @click="duplicateNote(note.id)" class="note-icon duplicate" src="img/keep-icons/duplicate.png" />
+                <img @click="openEditor(note.id)" class="note-icon edit" src="img/keep-icons/edit.png" />
             </div>
             <div v-if="editedNote" class="editing-cmd">
                 <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video'" type="text" placeholder="Edit Title" v-model="editedNote.info.title">
