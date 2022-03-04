@@ -9,6 +9,7 @@
 }
 
 .note {
+    text-align: center;
     border-radius: .5em;
     padding: 1rem .5rem;
     display: flex;

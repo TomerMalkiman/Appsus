@@ -4,12 +4,56 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3b599854;
-    height: 8vh;
+    background-color: #ecf2ff54;
+    margin-bottom: 10px;
+    height: 9vh;
     padding: 0 1rem;
-    box-shadow: 0 0 10px;
+    /* box-shadow: 0 0 10px; */
+    border-bottom: 1px solid var(--hovermode);
+    position: relative;
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.app-header .logo-icon {
+    height: 9vh;
+}
+
+.app-header .nav-icon:hover {
+    background-color: var(--hovermode);
+}
+
+.app-header .nav-icon img {
+    /* width: 40px; */
+    padding: 10px;
+}
+
+.app-header .nav-icon {
+    border-radius: 50%;
+}
+
+.nav-bar {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 10vh;
+    transform: translateX(150%);
+    transition: transform .3s;
+}
+
+.nav-bar.open-nav {
+    transform: translateX(0);
 }
 
 .app-header .nav-bar>* {
     padding: 5px;
 }
+
+.app-header nav img {
+    width: 30px;
+}
+
+.app-header .nav-bar>*:hover {}

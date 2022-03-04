@@ -18,10 +18,6 @@ export default {
             this.$emit('todo-done', todoId, noteId)
         }
     },
-    computed: {
-        isDone() {
-
-        }
-    },
+    computed: {},
     unmounted() {},
 }
