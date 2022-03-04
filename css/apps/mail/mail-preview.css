@@ -4,6 +4,7 @@
     border-bottom: 1px solid rgba(165, 160, 160, 0.342);
     padding: 10px 10px;
     position: relative;
+    font-size:1.1rem;
 }
 
 .mail-preview a {
@@ -72,6 +73,10 @@
     padding: 10px;
 }
 
+.mail-nav>*:not(:first-child,:last-child){
+    letter-spacing: 0.03rem;
+}
+
 .mail-nav>*:not(:first-child,:last-child):hover{
     background-color: lightgrey;
     border-bottom-right-radius: 25px;
@@ -79,6 +84,10 @@
     cursor: pointer;
 }
 
+.mail-nav>*:not(:first-child,:last-child){
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+}
 
 .main{
     grid-area: main;
@@ -299,3 +308,17 @@ background-color: lightcyan;
     transform: translateY(0%);
     
 } 
+
+
+.inbox-nav{
+    background-color: #fce8e6;
+    color: #D93025;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.nav-option{
+    background-color: #e8eaed;
+    font-weight: bold;
+    border-radius: 5px;
+}
