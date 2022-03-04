@@ -24,7 +24,7 @@
 }
 
 .note img {
-    max-width: 150px;
+    max-width: 200px;
 }
 
 .note:hover .note-icon {
@@ -43,7 +43,7 @@
 .note-icon.delete {
     background: none;
     cursor: pointer;
-    right: 105px;
+    left: 5px;
 }
 
 .note:hover .note-icon {

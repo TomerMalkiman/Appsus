@@ -1,7 +1,6 @@
 .note-filter {
     display: flex;
     justify-content: center;
-    box-shadow: 0 0 5px;
     overflow: hidden;
 }
 
@@ -14,19 +13,27 @@
     align-items: center;
     margin: 0 10px;
     width: 100%;
-    border-bottom: 1px solid black;
     padding: 8px;
     cursor: pointer;
     transform: translateX(-5%);
+    border-radius: 5rem;
 }
 
 .note-filter nav>*:hover {
-    background-color: var(--clr3);
+    background-color: rgba(211, 211, 211, 0.2)
 }
 
 .note-filter nav div:last-child {
-    border: none;
     margin-top: 20px;
+}
+
+.note-filter nav div:last-child input {
+    border: none;
+    box-shadow: 0 0 5px;
+}
+
+.note-filter nav div:last-child input:focus-visible {
+    outline: none;
 }
 
 .note-filter nav div:last-child:hover {
@@ -35,6 +42,6 @@
 }
 
 .note-filter img {
-    width: 30px;
+    width: 20px;
     margin-right: 5px;
 }

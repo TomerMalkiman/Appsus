@@ -1,17 +1,11 @@
 .main-keep-app {
-    /* display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-areas: "filter main";
-    gap: 2px; */
     display: flex;
 }
 
 .right-side {
-    /* grid-area: main; */
     width: 85vw;
 }
 
 .note-filter {
-    /* grid-area: filter; */
     width: 15vw;
 }

@@ -2,6 +2,12 @@
     .note-list {
         column-count: 3;
     }
+    .right-side {
+        width: 83vw;
+    }
+    .note-filter {
+        width: 17vw;
+    }
 }
 
 @media (max-width: 1000px) {

@@ -93,6 +93,7 @@ function saveNote(note) {
             type: "note-txt",
             isPinned: false,
             info: {
+                title: note.info.title,
                 txt: note.info.txt
             },
             style: {

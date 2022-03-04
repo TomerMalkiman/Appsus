@@ -1,19 +1,37 @@
 /* add note */
 
 .add-note {
-    padding: 30px;
+    padding: 40px 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--clr3);
+}
+
+.add-note .title-input-container {
+    padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px;
+    transform: translateY(10px);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.add-note .title-input {
+    border: none;
+}
+
+.add-note .title-input:focus-visible {
+    outline: none;
 }
 
 .add-note-cmd {
     position: relative;
     width: 400px;
-    height: 60px;
+    height: 50px;
     background-color: white;
+    box-shadow: 0 0 10px;
+    border-radius: 10px;
 }
 
 .add-note-cmd input {
@@ -22,6 +40,10 @@
     border: none;
     left: 0;
     transform: translate(5%, 50%);
+}
+
+.add-note-cmd input:focus+.title-input {
+    display: block;
 }
 
 .add-note-cmd input:focus-visible {

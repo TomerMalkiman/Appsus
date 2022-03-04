@@ -19,7 +19,7 @@ export default {
                 <img @click="deleteNote(note.id)" class="note-icon delete" src="img/keep-icons/delete.png"/>
             </div>
             <div v-if="editedNote" class="editing-cmd">
-                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video'" type="text" placeholder="Edit Title" v-model="editedNote.info.title">
+                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video' || editedNote.type === 'note-txt'" type="text" placeholder="Edit Title" v-model="editedNote.info.title">
                 <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video'" type="text" placeholder="Enter New Url" v-model="editedNote.info.url">
                 <input @input="editNote(note.id)" v-if="editedNote.type === 'note-txt'" type="text" placeholder="Enter New Txt" v-model="editedNote.info.txt">
                 <input @input="editNote(note.id)" v-if="editedNote.type === 'note-todos'" type="text" placeholder="Enter New Label" v-model="editedNote.info.label">
@@ -67,6 +67,7 @@ export default {
                         type: "note-txt",
                         isPinned: this.note.isPinned,
                         info: {
+                            title: this.note.info.title,
                             txt: this.note.info.txt,
                         },
                         style: {
