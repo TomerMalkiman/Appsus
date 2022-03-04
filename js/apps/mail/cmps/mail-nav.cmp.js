@@ -11,31 +11,45 @@ export default {
                       <div>Compose</div>
                   </div>
                   <div :class="optionSelected" @click="changeMode" @click="setStatus('inbox')"
-                   class="inbox"> <span class="fa-solid fa-inbox"></span> Inbox</div>
-                  <div @click="setStatus('starred')" class="starred"> <span class="fa-solid fa-star"></span> Starred</div>
-                  <div @click="setStatus('sent-mails')" class="sent-mails"> <span  class="fa-solid fa-paper-plane" ></span> Sent</div>
-                  <div @click="setStatus('deleted')" class="deleted-mails"> <span class="fa-solid fa-trash-can"></span> Deleted</div>
+                   class="inbox" :style="filterBy === 'inbox' ? 
+                   'background-color: #fce8e6;color:#D93025;font-weight:bold' : ''"> 
+                   <span class="fa-solid fa-inbox"></span> Inbox</div>
+
+                  <div @click="setStatus('starred')" class="starred"
+                   :style="filterBy === 'starred' ? 'background-color: #e8eaed;font-weight:bold' : ''" > 
+                      <span class="fa-solid fa-star"></span> Starred</div>
+
+                  <div @click="setStatus('sent-mails')" class="sent-mails"
+                  :style="filterBy === 'sent-mails' ? 'background-color: #e8eaed;font-weight:bold' : ''"> 
+                      <span  class="fa-solid fa-paper-plane" ></span> Sent</div>
+
+                  <div @click="setStatus('deleted')" class="deleted-mails"
+                  :style="filterBy === 'deleted' ? 'background-color: #e8eaed;font-weight:bold' : ''">
+                       <span class="fa-solid fa-trash-can"></span> Deleted</div>
+
                   <div class="precantage" style='height:20px'>
                       <div class="precantage-color" style='height:20px' :style="[width,bgc]">{{unReadMailsDisplay}}%</div>
                   </div>
               </nav>
           </section>
+          
       `,
-    components: {
-    },
-    created() { },
+    components: {},
+    created() {},
     data() {
         return {
             unReadCounter: 0,
+            filterBy: 'inbox'
         }
     },
     methods: {
         setStatus(status) {
+            this.filterBy = status;
             this.$emit('status-changed', status)
         },
         compose() {
             eventBus.emit('compose', true)
-          }
+        }
     },
     computed: {
         unReadMailsDisplay() {
@@ -60,19 +74,14 @@ export default {
             const unreadPrecantage = ((this.unReadCounter / this.mails.length) * 100).toFixed();
             return 'width : ' + unreadPrecantage + '%';
         },
-        redMode(){
-          return {
-                red: this.isRed,
-            }
+        setInboxColor() {
+            return (this.filterBy === 'inbox') ? 'inbox-nav' : '';
         },
-        changeMode() {
-            this.isRed = !this.isRed
-            this.isGray = !this.isGray
-        },
+    },
+    setColor(filter) {
+        return this.filterBy === filter ? 'nav-option' : '';
 
     },
 
-    unmounted() { },
+    unmounted() {},
 }
-
-
