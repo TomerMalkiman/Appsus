@@ -3,10 +3,10 @@ export default {
   props: ["mail"],
   template: `
       
-        <section :style="bgc"  @mouseover="isHover = false"  @mouseleave="isHover = true"
+        <section :style="bgc" @click="readMail(mail.id)" @mouseover="isHover = false"  @mouseleave="isHover = true"
          class="mail-preview">
         <router-link :to="'/mail/'+mail.id">
-          <div :style="isStarred" ><i @click.native.prevent="toggleStar(mail.id)" 
+          <div :style="isStarred" class="star" ><i @click.native.prevent="toggleStar(mail.id)" 
           :class="isStarred" aria-hidden="true"></i></div>
             <div :style="isRead" class="mail-sender-name">{{mail.from}}</div>
             <div :style="isRead" class="mail-subject">{{mail.subject}}</div>
@@ -39,7 +39,9 @@ export default {
     },
     toggleStar(mailId){
       this.$emit('mark-star',mailId)
-
+    },
+    readMail(mailId){
+      this.$emit('read-mail',mailId)
     }
 
   },
@@ -69,7 +71,7 @@ export default {
       return this.mail.isRead ? `fa-solid fa-square-envelope` : 'fa-solid fa-envelope-open';
     },
     isStarred(){
-      return this.mail.isStarred ? 'fa-solid fa-star star' : 'fa fa-star-o' ;
+      return this.mail.isStarred ? 'fa-solid fa-star star-yellow' : 'fa fa-star-o' ;
     },
 
     sentAt() {

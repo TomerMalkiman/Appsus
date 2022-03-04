@@ -6,7 +6,10 @@ export default {
     template: `
           <section>
               <nav class="mail-nav">
-                  <button @click="compose" class="compose-btn">Compose</button>
+                  <div @click="compose" class="compose-btn">
+                      <img src="../../../../img/mail-icons/compose.jpg" alt="">
+                      <div>Compose</div>
+                  </div>
                   <div :class="optionSelected" @click="changeMode" @click="setStatus('inbox')"
                    class="inbox"> <span class="fa-solid fa-inbox"></span> Inbox</div>
                   <div @click="setStatus('starred')" class="starred"> <span class="fa-solid fa-star"></span> Starred</div>

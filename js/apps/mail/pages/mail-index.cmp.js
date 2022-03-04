@@ -13,9 +13,11 @@ export default {
             <mail-nav  v-if="mails"  @status-changed="setStatus" :mails="mailsForDisplay" />
             <div v-if="mails">{{unReadMailsDisplay}}</div>
             </section>
-            <mail-list v-if="mails" @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" :mails="mailsForDisplay"></mail-list>
+            <mail-list v-if="mails" @read-mail="readMail" @mark-star="toggleStar"
+             @delete="deleteMail" @remove="removeMail" @toggle-read="toggleRead" 
+             :mails="mailsForDisplay"></mail-list>
         </section>
-        <add-mail></add-mail>
+        <add-mail @add-mail="addMail"></add-mail>
         
     `,
     components: {
@@ -23,7 +25,7 @@ export default {
         mailNav,
         mailFilter,
         addMail
-        
+
 
     },
     created() {
@@ -56,6 +58,24 @@ export default {
                     this.mails.find(mail => mail.id === mailId).isRead = mail.isRead;
                 })
         },
+        readMail(mailId) {
+            mailService.readMail(mailId)
+                .then(mail => {
+                    if (mail.isRead) {
+                        this.mails.find(mail => mail.id === mailId).isRead = mail.isRead;
+                    }
+                })
+        },
+
+        toggleStar(mailId) {
+            mailService.toggleStar(mailId)
+                .then(mail => {
+                    this.mails.find(mail => mail.id === mailId).isStarred = mail.isStarred;
+                })
+        },
+        addMail(newMail){
+            this.mails.unshift(newMail);
+        },
         removeMail(mailId) {
             mailService.remove(mailId)
                 .then(() => {
@@ -79,7 +99,11 @@ export default {
         mailsForDisplay() {
             if (this.currStatus === 'starred') {
                 var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isStarred))
-            } else var mails = this.mails.filter(mail => mail.status === this.currStatus)
+            }
+            else if (this.currStatus === 'sent-mails') {
+                var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isSent))
+            }
+            else var mails = this.mails.filter(mail => (mail.status === this.currStatus && !mail.isSent))
 
             if (!this.filterBy) return mails;
 
@@ -100,5 +124,5 @@ export default {
         },
 
     },
-    unmounted() {},
+    unmounted() { },
 }

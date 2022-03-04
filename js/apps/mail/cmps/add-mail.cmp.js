@@ -4,7 +4,7 @@ import { mailService } from '../services/mail.service.js'
 
 export default {
   template: `
-     <section v-if="displayModal" class="add-mail" :class="modalStatus">
+     <section class="add-mail" :class="modalStatus">
              <div class="send-mail-top">
                   <h2>New Massage</h2>
                   <button @click="closeModal">x</button>
@@ -19,7 +19,7 @@ export default {
                    <div> 
                    <textarea rows="15" cols="50"  v-model="newMail.body"></textarea>
                    </div>     
-                   <button class="submit-send-btn" @click="sendMail(mail)">send</button>
+                   <button class="submit-send-btn" @click="sendMail(newMail)">send</button>
                 </form>      
              </div> 
     </section>
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       newMail: {
+        id:'',
         status: 'inbox',
         subject: '',
         body: '',
@@ -46,6 +47,7 @@ export default {
   },
   methods: {
     sendMail(mail) {
+      mail.from = 'Moshiko'
       mailService.saveMail(mail)
         .then(newMail => {
           this.displayModal = false
@@ -62,7 +64,7 @@ export default {
   },
   computed: {
     modalStatus() {
-      return (this.displayModal) ? 'open-mail' : '';
+      return (this.displayModal) ? 'open-send-mail' : '';
     },
   },
   unmounted() {
