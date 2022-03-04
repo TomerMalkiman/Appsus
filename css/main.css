@@ -1,13 +1,3 @@
-/* BASE */
-
-@import 'parts/vars.css';
-@import 'parts/base.css';
-@import 'parts/layout.css';
-@import 'parts/helpers.css';
-
-/* @import 'parts/mq.css'; */
-
-
 /* @import 'parts/buttons.css'; */
 
 
@@ -30,4 +20,12 @@
 @import 'apps/keep/note-list.css';
 @import 'apps/keep/add-note.css';
 @import 'apps/keep/note-filter.css';
-@import 'apps/keep/keep-app.css'
+@import 'apps/keep/keep-app.css';
+
+/* BASE */
+
+@import 'parts/vars.css';
+@import 'parts/base.css';
+@import 'parts/layout.css';
+@import 'parts/helpers.css';
+@import 'parts/mq.css';

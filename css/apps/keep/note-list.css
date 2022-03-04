@@ -1,12 +1,20 @@
+.notes {
+    padding: 10px;
+}
+
 .note-list {
     position: relative;
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
+    gap: 10px; */
+    column-count: 4;
+    column-gap: 10px;
+    /* column-fill: balance; */
+    padding: 10px 0;
 }
 
 .notes {
-    max-width: 100vw;
+    max-width: 100%;
 }
 
 .notes>* {
