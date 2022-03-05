@@ -4,8 +4,8 @@ import { mailService } from '../services/mail.service.js'
 
 export default {
     template: `
-     <section @click="toggleNewMail" class="add-mail" :class="modalStatus" :style="newMailUpDown">
-             <div class="send-mail-top">
+     <section class="add-mail" :class="modalStatus" :style="newMailUpDown">
+             <div @click="toggleNewMail" class="send-mail-top">
                   <h2>New Massage</h2>
                   <div class="sent-buttons-container">
                       <span class="toggle-new-mail" @click="toggleNewMail">|</span>

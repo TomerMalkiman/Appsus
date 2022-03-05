@@ -1,0 +1,13 @@
+.app-about {
+    background-color: #FFF5E5;
+    text-align: center;
+}
+
+.app-about .the-about {
+    column-count: 5;
+    padding: 10px 50px;
+}
+
+.app-about .in-the-sograim {
+    font-size: .6rem;
+}

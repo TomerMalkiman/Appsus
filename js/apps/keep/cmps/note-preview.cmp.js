@@ -12,12 +12,14 @@ export default {
         <section :style="bgc" class="note">
             <component :is="note.type" :note="note" @click="openEditor(note.id)" @todo-done="toggleTodo"/>
             <div class="options">
-                <input v-model="note.style.backgroundColor" @input="updateBgc(note.id)" type="color" :id="note.id">
-                <label :for="note.id"><img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" /></label>
+                <img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" @mouseover="openPalette" @mouseleave="closePalette"/>
                 <img @click="togglePin(note.id)" class="note-icon pin" :class="isPinned" src="img/keep-icons/pin.png" />
                 <img @click="duplicateNote(note.id)" class="note-icon duplicate" src="img/keep-icons/duplicate.png" />
                 <img @click="openEditor(note.id)" class="note-icon edit" src="img/keep-icons/edit.png" />
                 <img @click="deleteNote(note.id)" class="note-icon delete" src="img/keep-icons/delete.png"/>
+            </div>
+            <div v-if="isPaletteOpen || isMouseOverPalette" class="color-palette" @mouseover="mouseOnPalette" @mouseleave="mouseLeftPalette">
+                <div class="color-choice" v-for="color in options" @click="updateBgc(note.id,color.color)" :style="'background-color:'+color.color"></div>
             </div>
         </section>
     </section>
@@ -45,11 +47,15 @@ export default {
         noteVideo
     },
     created() {
-        const unsubscribe = eventBus.on('screen-closed', this.closeEditor)
+        eventBus.on('screen-closed', this.closeEditor)
+
     },
     data() {
         return {
             editedNote: null,
+            options: [{ color: '#aecbfa' }, { color: '#e8eaed' }, { color: '#e6c9a8' }, { color: '#fdcfe8' }, { color: '#d7aefb' }, { color: '#cbf0f8' }, { color: '#a7ffeb' }, { color: '#ccff90' }, { color: '#fff475' }, { color: '#fbbc04' }, { color: '#f28b82' }],
+            isPaletteOpen: false,
+            isMouseOverPalette: false,
         }
     },
     methods: {
@@ -61,8 +67,9 @@ export default {
         togglePin(noteId) {
             this.$emit('note-pinned', noteId)
         },
-        updateBgc(noteId) {
-            this.$emit('note-bgc-updated', noteId, this.note.style.backgroundColor)
+        updateBgc(noteId, color) {
+            this.$emit('note-bgc-updated', noteId, color)
+            this.note.style.backgroundColor = color
         },
         toggleTodo(todoId, noteId) {
             this.$emit('todo-done', todoId, noteId)
@@ -139,7 +146,23 @@ export default {
         },
         closeEditor() {
             this.editedNote = null;
-        }
+        },
+        openPalette() {
+            this.isPaletteOpen = true
+        },
+        closePalette() {
+            setTimeout(() => {
+                this.isPaletteOpen = false
+            }, 1000)
+        },
+        mouseOnPalette() {
+            this.isMouseOverPalette = true
+        },
+        mouseLeftPalette() {
+            setTimeout(() => {
+                this.isMouseOverPalette = false
+            }, 1000)
+        },
     },
     computed: {
         bgc() {

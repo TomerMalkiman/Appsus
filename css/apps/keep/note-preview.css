@@ -5,6 +5,7 @@
     display: inline-block;
     margin: 10px;
     margin-left: 50%;
+    margin-bottom: 30px;
     transform: translateX(-50%);
     transition: box-shadow .3s;
 }
@@ -16,7 +17,7 @@
 .note {
     text-align: center;
     border-radius: .5em;
-    padding: 1rem 0 0;
+    padding: 1rem 0 30px;
     display: flex;
     gap: 5px;
     flex-direction: column;
@@ -25,7 +26,6 @@
     position: relative;
     height: fit-content;
     transition: border .3s, background-color .1s;
-    overflow: hidden;
     break-inside: avoid;
 }
 
@@ -148,4 +148,22 @@
 
 .editing-cmd .note-icon {
     opacity: 1;
+}
+
+.color-palette {
+    position: absolute;
+    padding: 5px;
+    display: flex;
+    bottom: 0;
+    transform: translateY(100%);
+}
+
+.color-palette .color-choice {
+    margin: 0 2px;
+    z-index: 5;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid white;
 }

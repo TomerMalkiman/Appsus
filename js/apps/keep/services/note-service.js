@@ -192,11 +192,60 @@ function _createNotes() {
                     },
                     {
                         id: utilService.makeId(),
+                        type: "note-video",
+                        isPinned: true,
+                        info: {
+                            url: "https://www.youtube.com/embed/qAYWw67yiN0",
+                            title: "Some Songs"
+
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    },
+                    {
+                        id: utilService.makeId(),
                         type: "note-img",
                         isPinned: true,
                         info: {
                             url: "https://i.imgflip.com/67f8oz.jpg",
                             title: "Box Shadow"
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    },
+                    {
+                        id: utilService.makeId(),
+                        type: "note-img",
+                        isPinned: true,
+                        info: {
+                            url: "https://i.imgflip.com/67k6s6.jpg",
+                            title: "Scratching pupiks"
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    },
+                    {
+                        id: utilService.makeId(),
+                        type: "note-img",
+                        isPinned: true,
+                        info: {
+                            url: "https://25.media.tumblr.com/7ebe1f7cd648320a8b027cc182386132/tumblr_mhq8386AFz1rhcghpo1_400.gif",
+                            title: "My mom when she needs help but I have a sprint to complete"
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    },
+                    {
+                        id: utilService.makeId(),
+                        type: "note-img",
+                        isPinned: true,
+                        info: {
+                            url: "https://i.pinimg.com/originals/32/80/a9/3280a988c1d0d1ecd1be9f615c44e6b0.gif",
+                            title: "Trying to apply Drag and Drop to my project"
                         },
                         style: {
                             backgroundColor: utilService.getRandomColor()
