@@ -146,7 +146,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
-                        status : 'inbox',
+                        status : 'deleted',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,

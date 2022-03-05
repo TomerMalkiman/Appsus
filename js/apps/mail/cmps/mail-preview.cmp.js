@@ -13,8 +13,8 @@ export default {
             <div class="mail-content">{{mailContent}}</div>
             <div v-if="isHover":style="isRead" class="mail-date">{{sentAt}}</div>
             <div class="actions-btns">
-                <button class="mail-remove-btn btn" @click.native.prevent="remove(mail.id)"><i class=" fa-solid fa-trash-can"></i></button>
-                <button class="mail-read-btn btn" @click.native.prevent="toggleRead(mail.id)"><i :class="isReadText"></i></button>
+                <div class="mail-remove-btn btn" @click.native.prevent="remove(mail.id)"><i class=" fa-solid fa-trash-can"></i></div>
+                <div class="mail-read-btn btn" @click.native.prevent="toggleRead(mail.id)"><i :class="isReadText"></i></div>
             </div>
             </router-link>
         </section>
