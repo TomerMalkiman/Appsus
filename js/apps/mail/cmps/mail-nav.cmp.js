@@ -44,7 +44,9 @@ export default {
           
       `,
     components: {},
-    created() {},
+    created() {
+
+    },
     data() {
         return {
             filterBy: 'inbox'

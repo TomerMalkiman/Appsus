@@ -27,7 +27,8 @@ export default {
   created() { },
   data() {
     return {
-      isHover: true
+      isHover: true,
+      width: window.innerWidth
     }
   },
   methods: {
@@ -37,24 +38,24 @@ export default {
     remove(mailId) {
       this.$emit('remove', mailId);
     },
-    toggleStar(mailId){
-      this.$emit('mark-star',mailId)
+    toggleStar(mailId) {
+      this.$emit('mark-star', mailId)
     },
-    readMail(mailId){
-      this.$emit('read-mail',mailId)
+    readMail(mailId) {
+      this.$emit('read-mail', mailId)
     }
 
   },
   computed: {
     mailContent() {
-      return (this.mail.body.length > 30) ?
-        this.mail.body.slice(0, 30) + '...' :
-        this.mail.body;
+      if (this.mail.body.length > 30 && this.width >= 1120) return this.mail.body.slice(0, 30) + '...'
+      else if (this.mail.body.length > 70 && this.width <= 1120) return this.mail.body.slice(0, 70) + '...'
+      return this.mail.body;
 
     },
     mailSubject() {
-      return (this.mail.subject.length > 30) ?
-        this.mail.subject.slice(0, 30) + '...' :
+      return (this.mail.subject.length > 20) ?
+        this.mail.subject.slice(0, 20) + '...' :
         this.mail.subject;
 
     },
@@ -70,41 +71,50 @@ export default {
     isReadText() {
       return this.mail.isRead ? `fa-solid fa-square-envelope` : 'fa-solid fa-envelope-open';
     },
-    isStarred(){
-      return this.mail.isStarred ? 'fa-solid fa-star star-yellow' : 'fa fa-star-o' ;
+    isStarred() {
+      return this.mail.isStarred ? 'fa-solid fa-star star-yellow' : 'fa fa-star-o';
     },
 
     sentAt() {
       var mailDate = new Date(this.mail.sentAt);
       var timeDiff = Date.now() - this.mail.sentAt;
-      // console.log(this.mail.sentAt)
-      // console.log('mailDate', mailDate)
-      // console.log('timeDiff', timeDiff)
+      console.log(this.mail.sentAt)
+
+      var myDateStr;
+      mailDate.setDate(mailDate.getDate() + 20);
+
       if (timeDiff < 86400000) {// A day
-        // console.log('Today!')
+        const AMPM = (mailDate.getHours() > 12) ? ' PM' : ' AM';
         return mailDate.getHours() + ':' + ((mailDate.getMinutes() < 10) ?
-          '0' + (mailDate.getMinutes() + 1) : mailDate.getMinutes());
+          '0' + (mailDate.getMinutes() + 1) : mailDate.getMinutes()) + AMPM;
 
       }
       else if (timeDiff > 31556926000) {//31556926000 is a year in timeStamp
-        // console.log('befor a year!')
-        // console.log(mailDate)
-        // console.log(mailDate.getDay(), mailDate.getMonth())
-        return mailDate.getDay() + '/'
-          + (mailDate.getMonth() + 1) + '/'
-          + mailDate.getFullYear()
+        myDateStr = ('0' + mailDate.getDate()).slice(-2) + '/'
+          + ('0' + (mailDate.getMonth() + 1)).slice(-2) + '/'
+          + mailDate.getFullYear();
+
+        return myDateStr
       }
-      else return mailDate.getDay() + ' / ' + mailDate.getMinutes();
+      else {
+        const mon = new Intl.DateTimeFormat('en', { month: 'short' }).format(mailDate)
+        const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(mailDate)
+        return `${day}-${mon}`
+      }
     }
   },
   unmounted() { },
 }
 
 
+var MyDate = new Date();
+var MyDateString;
 
+MyDate.setDate(MyDate.getDate() + 20);
 
-
-
+MyDateString = ('0' + MyDate.getDate()).slice(-2) + '/'
+  + ('0' + (MyDate.getMonth() + 1)).slice(-2) + '/'
+  + MyDate.getFullYear();
 
 
 

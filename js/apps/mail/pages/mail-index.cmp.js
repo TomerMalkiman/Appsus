@@ -99,11 +99,16 @@ export default {
         mailsForDisplay() {
             if (this.currStatus === 'starred') {
                 var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isStarred))
+                mails.sort((a,b)=> (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
             }
             else if (this.currStatus === 'sent-mails') {
                 var mails = this.mails.filter(mail => ((mail.status === 'inbox') && mail.isSent))
+                mails.sort((a,b)=> (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
+
             }
-            else var mails = this.mails.filter(mail => (mail.status === this.currStatus && !mail.isSent))
+            else{ var mails = this.mails.filter(mail => (mail.status === this.currStatus && !mail.isSent))
+                mails.sort((a,b)=> (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
+            }
 
             if (!this.filterBy) return mails;
 
@@ -118,6 +123,7 @@ export default {
                 mails = mails.filter((mail) => {
                     if (regex.test(mail.subject)) return mail
                     if (regex.test(mail.body)) return mail
+                    if (regex.test(mail.from)) return mail
                 })
             }
             return mails;

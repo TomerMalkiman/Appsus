@@ -18,7 +18,10 @@ export default {
     components: {
         mailPreview
     },
-    created() { },
+    created() { 
+        this.mails.sort((a,b)=> (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
+       
+    },
     data() {
         return {
             currMail: null

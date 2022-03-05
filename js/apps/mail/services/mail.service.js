@@ -146,7 +146,7 @@ function _createMails() {
                     },
                     {
                         id: utilService.makeId(),
-                        status : 'deleted',
+                        status : 'inbox',
                         subject: 'Miss you!',
                         body: 'Would love to catch up sometimes',
                         isRead: true,
@@ -188,7 +188,7 @@ function _createMails() {
                         isRead: false,
                         isStarred: false,
                         isSent: false,
-                        sentAt: 1646233550000,
+                        sentAt: 1646233853310,
                         to: 'momo@momo.com',
                         from: 'Tomer'
                     },
@@ -200,7 +200,7 @@ function _createMails() {
                         isRead: false,
                         isStarred: false,
                         isSent: false,
-                        sentAt: 1613138798220,
+                        sentAt: 1646481561000,
                         to: 'momo@momo.com',
                         from: 'Tomer'
                     },
