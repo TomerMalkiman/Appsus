@@ -46,8 +46,7 @@
     width: 50%;
     height: 50%;
     border: none;
-    /* left: 0; */
-    /* transform: translate(5%, 50%); */
+    margin-left: 10px;
 }
 
 .add-note-cmd input:focus+.title-input {

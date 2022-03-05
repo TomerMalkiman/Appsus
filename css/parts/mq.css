@@ -28,6 +28,7 @@
     }
     .add-note-cmd input {
         text-align: center;
+        margin-left: 0;
     }
     .add-note-types {
         right: 50%;
