@@ -87,84 +87,72 @@ function _createMails() {
                 mails = [{
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Hello!',
-                        body: 'Would love to catch up sometimes',
+                        subject: 'You have won a new car!',
+                        body: 'Hey tomer, click here to get your car',
                         isRead: false,
                         isStarred: true,
                         isSent: false,
                         sentAt: 1611237578675,
                         to: 'momo@momo.com',
-                        from: 'Tomer'
+                        from: 'Unknown'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Sprint 3!',
-                        body: 'Would love to catch up sometimes',
+                        subject: 'Virus on your computer!',
+                        body: 'Someone hacked into your computer',
                         isRead: false,
                         isStarred: true,
                         isSent: false,
-                        sentAt: 1612345675457,
+                        sentAt: 1611947728457,
+                        to: 'momo@momo.com',
+                        from: 'Microsoft'
+                    },
+                    {
+                        id: utilService.makeId(),
+                        status: 'inbox',
+                        subject: 'Push pull',
+                        body: 'Tomer lets do push and pull to be Synchronized',
+                        isRead: true,
+                        isStarred: false,
+                        isSent: false,
+                        sentAt: 1611117778347,
                         to: 'momo@momo.com',
                         from: 'Ben'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Why its not working!!!',
-                        body: 'Would love to catch up sometimes',
-                        isRead: true,
-                        isStarred: false,
-                        isSent: false,
-                        sentAt: 1611117778347,
-                        to: 'momo@momo.com',
-                        from: 'Shifra'
-                    },
-                    {
-                        id: utilService.makeId(),
-                        status: 'inbox',
-                        subject: 'HELP!',
-                        body: 'Im stuckk',
+                        subject: 'WTF have you done',
+                        body: 'i have tons of git conflicts!!!',
                         isRead: false,
                         isStarred: false,
-                        isSent: false,
-                        sentAt: 1613214778220,
-                        to: 'momo@momo.com',
-                        from: 'Yankle'
-                    },
-                    {
-                        id: utilService.makeId(),
-                        status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'lets meet',
-                        isRead: true,
-                        isStarred: true,
                         isSent: false,
                         sentAt: 1611222778098,
                         to: 'momo@momo.com',
-                        from: 'David'
+                        from: 'Ben'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
+                        subject: 'I trust you!',
+                        body: 'Make a better mail than gmail',
+                        isRead: true,
+                        isStarred: true,
+                        isSent: false,
+                        sentAt:1601213718398 ,
+                        to: 'momo@momo.com',
+                        from: 'Amir'
+                    },
+                    {
+                        id: utilService.makeId(),
+                        status: 'inbox',
+                        subject: 'Forget about the last mail',
+                        body: 'Just make the mail work...',
                         isRead: true,
                         isStarred: false,
                         isSent: false,
-                        sentAt: 1601213718398,
-                        to: 'momo@momo.com',
-                        from: 'Tom'
-                    },
-                    {
-                        id: utilService.makeId(),
-                        status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
-                        isRead: false,
-                        isStarred: true,
-                        isSent: false,
-                        sentAt: 1611947728457,
+                        sentAt: 1601312768173 ,
                         to: 'momo@momo.com',
                         from: 'Amir'
                     },
@@ -176,45 +164,69 @@ function _createMails() {
                         isRead: false,
                         isStarred: true,
                         isSent: false,
-                        sentAt: 1612314678290,
+                        sentAt:1612314678290,
                         to: 'momo@momo.com',
-                        from: 'Tal'
+                        from: 'Nobody'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
+                        subject: 'Credit warning!',
+                        body: 'You cant use Lidor Waldman credit card anymore, please try other cresdit card',
+                        isRead: false,
+                        isStarred: true,
+                        isSent: false,
+                        sentAt:1612345675457,
+                        to: 'momo@momo.com',
+                        from: 'APIS Bank'
+                    },
+                    {
+                        id: utilService.makeId(),
+                        status: 'inbox',
+                        subject: 'Hey tomer!',
+                        body: 'You are my super hero!',
                         isRead: false,
                         isStarred: false,
                         isSent: false,
                         sentAt: 1646233853310,
                         to: 'momo@momo.com',
-                        from: 'Tomer'
+                        from: 'Spiderman'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes, talk with me baby!',
+                        subject: 'Hey tomer!',
+                        body: 'I saw your prdoject, sending you a 100 NIS voucher',
                         isRead: false,
                         isStarred: false,
                         isSent: false,
                         sentAt: 1646481561000,
                         to: 'momo@momo.com',
-                        from: 'Tomer'
+                        from: 'Latet organization'
                     },
                     {
                         id: utilService.makeId(),
                         status: 'inbox',
-                        subject: 'Miss you!',
-                        body: 'Would love to catch up sometimes',
+                        subject: 'Job reply',
+                        body: 'Remove',
                         isRead: false,
                         isStarred: false,
                         isSent: false,
-                        sentAt: 1601312768173,
+                        sentAt:   1613214778220,
                         to: 'momo@momo.com',
-                        from: 'Tomer'
+                        from: 'Google'
+                    },
+                    {
+                        id: utilService.makeId(),
+                        status: 'inbox',
+                        subject: 'Remember me?',
+                        body: 'come back to me, you dont need the other shit',
+                        isRead: false,
+                        isStarred: false,
+                        isSent: false,
+                        sentAt:   1643222778220,
+                        to: 'momo@momo.com',
+                        from: 'Hello world'
                     }
                 ]
                 console.log(mails)
