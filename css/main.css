@@ -16,6 +16,8 @@
 /* APPS*/
 
 @import 'apps/mail/mail-preview.css';
+@import 'apps/mail/add-mail.css';
+@import 'apps/mail/mail-mediaQueries.css';
 @import 'apps/keep/note-preview.css';
 @import 'apps/keep/note-list.css';
 @import 'apps/keep/add-note.css';

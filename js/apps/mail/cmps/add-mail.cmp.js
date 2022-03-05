@@ -4,7 +4,7 @@ import { mailService } from '../services/mail.service.js'
 
 export default {
   template: `
-     <section  class="add-mail" :class="modalStatus">
+     <section  class="add-mail" :class="modalStatus" :style="newMailUpDown">
              <div class="send-mail-top">
                   <h2>New Massage</h2>
                   <div class="sent-buttons-container">
@@ -31,7 +31,7 @@ export default {
                         </div> 
 
                         <div class="new-mail-btns">   
-                            <button class="submit-send-btn" @click="sendMail(newMail)">send</button>
+                            <button class="submit-send-btn" @click="sendMail(newMail)">Send</button>
                             <div class="new-mail-remove-btn btn" @click="closeModal"><i class=" fa-solid fa-trash-can fa-2x"></i></div>
                         </div> 
                 </form>  
@@ -55,7 +55,7 @@ export default {
       },
 
       displayModal: false,
-      // isNewMailOpen : false
+      isNewMailOpen : false
     }
   },
   created() {
@@ -77,20 +77,21 @@ export default {
     closeModal() {
       this.displayModal = false
     },
-    // toggleNewMail() {
-    //   this.isNewMailOpen = !this.isNewMailOpen
-    // },
+    toggleNewMail() {
+      this.isNewMailOpen = !this.isNewMailOpen
+    },
    
   },
   computed: {
     modalStatus() {
+      console.log(this.displayModal);
       return (this.displayModal) ? 'open-send-mail' : '';
     },
-    // newMailUpDown(){
+    newMailUpDown(){
 
-    //   return (this.isNewMailOpen) ? 'close-down' : 'open-up';
+      return (this.isNewMailOpen) ? 'transform: translate(150%, 93%)' : '';
 
-    // }
+    }
   },
   unmounted() {
     this.unsubscribe();

@@ -1,0 +1,64 @@
+@media (max-width: 1270px) {
+    .mail-date{
+        right: 25px;
+    }
+
+}
+
+@media (max-width: 1190px) {
+    .mail-subject{
+        width: 25%;
+    }
+}
+
+@media (max-width:1120px){
+
+    .mail-preview a {
+        flex-direction: column;
+    }
+
+    .mail-content{
+        width:80%
+    }
+
+    .mail-preview{
+        padding: 17px 10px;
+    }
+
+    .star{
+        transform: translateY(-12%);
+        position: absolute;
+        right: 30px;
+        bottom: 0;
+    }
+
+    .actions-btns{
+        right: 0;
+        transform: translateX(-10px);
+        transform: translateY(-10px);
+    }
+
+    .mail-date{
+        width: 15%;
+    }
+
+}
+
+
+@media (max-width:870px){
+    .mails-screen {
+       display: flex;
+    }
+
+    .mail-nav{
+        width: 20%;  
+    }
+
+    .mails-list {
+        width: 80%;
+    }
+
+}
+
+
+
