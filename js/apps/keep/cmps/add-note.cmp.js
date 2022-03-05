@@ -4,11 +4,13 @@ import { utilService } from '../../../services/util.service.js'
 export default {
     template: `
         <section class="add-note">
-            
+            <div v-if="isInputFocused || isTitleFocused" class="title-input-container">    
+                <input type="text" @focus="titleFocused" @blur="titleBlured" class="title-input" v-model="note.info.title" placeholder="Add title" @keyup.enter="saveNote" />
+            </div>
             <div class="add-note-cmd">
-                <input ref="noteInput" v-if="note.type=== 'note-txt'" v-model="note.info.txt" type="text" @blur="inputBlured" @focus="inputFocused" :placeholder="noteType">
-                <input ref="noteInput" v-if="note.type === 'note-img' || note.type === 'note-video'" v-model="note.info.url" @blur="inputBlured" @focus="inputFocused" type="text" :placeholder="noteType">
-                <input ref="noteInput" v-if="note.type === 'note-todos'" v-model="note.info.label" type="text" :placeholder="noteType">
+                <input ref="noteInput" v-if="note.type=== 'note-txt'" v-model="note.info.txt" type="text" @blur="inputBlured" @focus="inputFocused" :placeholder="noteType" @keyup.enter="saveNote">
+                <input ref="noteInput" v-if="note.type === 'note-img' || note.type === 'note-video'" v-model="note.info.url" @blur="inputBlured" @focus="inputFocused" type="text" :placeholder="noteType" @keyup.enter="saveNote">
+                <input ref="noteInput" v-if="note.type === 'note-todos'" v-model="note.info.label" type="text" :placeholder="noteType" @keyup.enter="saveNote">
                 <div class="add-note-types">
                     <img :style="note.type=== 'note-txt' ? 'opacity: 1' : ''" src="img/keep-icons/text.png" @click="setNote('note-txt')"/>
                     <img :style="note.type=== 'note-video' ? 'opacity: 1' : ''" src="img/keep-icons/video.png" @click="setNote('note-video')"/>
@@ -16,14 +18,10 @@ export default {
                     <img :style="note.type=== 'note-todos' ? 'opacity: 1' : ''" src="img/keep-icons/list.png" @click="setNote('note-todos')"/>
                 </div>
             </div>
-            <div v-if="isInputFocused || isTitleFocused" class="title-input-container">    
-                <input type="text" @focus="titleFocused" @blur="titleBlured" class="title-input" v-model="note.info.title" placeholder="Add title">
-            </div>
             <div v-if="note.type === 'note-todos'" class="note-input">
                 <img class="add-todo-btn" src="img/keep-icons/plus.png" @click="addTodo" />
                 <input v-for="todo in note.info.todos" type="text" v-model="todo.txt">
             </div>
-            <!-- <button v-if="note.type" class="add-note-save" @click="saveNote">Save</button> -->
         </section>
     `,
     components: {},
@@ -126,9 +124,7 @@ export default {
         inputBlured() {
             setTimeout(() => {
                 this.isInputFocused = false;
-                if (this.isTitleFocused === false) {
-                    this.saveNote();
-                }
+                if (this.isTitleFocused === false) {}
             }, 10)
         },
         titleFocused() {
@@ -137,9 +133,7 @@ export default {
         titleBlured() {
             setTimeout(() => {
                 this.isTitleFocused = false;
-                if (this.isInputFocused === false) {
-                    this.saveNote();
-                }
+                if (this.isInputFocused === false) {}
             }, 10);
         },
     },

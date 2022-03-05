@@ -6,15 +6,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .add-note .title-input-container {
+    position: absolute;
     padding: 5px 10px;
     background-color: #fff;
+    left: 50%;
     box-shadow: 0 0 10px;
-    transform: translateY(10px);
     margin-bottom: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
+    transform: translate(-152%, -160%);
 }
 
 .add-note .title-input {
@@ -27,7 +30,7 @@
 
 .add-note-cmd {
     position: relative;
-    width: 400px;
+    width: 500px;
     height: 50px;
     background-color: white;
     box-shadow: 0 0 10px;

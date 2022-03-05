@@ -43,9 +43,8 @@ export default {
           </section>
           
       `,
-    components: {
-    },
-    created() { },
+    components: {},
+    created() {},
     data() {
         return {
             filterBy: 'inbox'
@@ -86,6 +85,7 @@ export default {
         setInboxColor() {
             return (this.filterBy === 'inbox') ? 'inbox-nav' : '';
         },
+<<<<<<< HEAD
         colorCircle() {
             return `stroke-dashoffset: calc(440 - (440*${this.unReadMailsDisplay}) / 100);`
         }
@@ -97,5 +97,13 @@ export default {
 
     unmounted() { },
 }
+=======
+    },
+    setColor(filter) {
+        return this.filterBy === filter ? 'nav-option' : '';
+>>>>>>> 776c6dd4fcd603c25e561972ddad8853273500b4
 
+    },
 
+    unmounted() {},
+}

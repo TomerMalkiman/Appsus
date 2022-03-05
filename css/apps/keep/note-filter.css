@@ -13,9 +13,9 @@
     align-items: center;
     margin: 0 10px;
     width: 100%;
-    padding: 8px;
+    padding: 8px 50px;
     cursor: pointer;
-    transform: translateX(-5%);
+    transform: translateX(-20%);
     border-radius: 5rem;
 }
 
@@ -29,7 +29,9 @@
 
 .note-filter nav div:last-child input {
     border: none;
+    border-radius: 5px;
     box-shadow: 0 0 5px;
+    margin: auto;
 }
 
 .note-filter nav div:last-child input:focus-visible {
