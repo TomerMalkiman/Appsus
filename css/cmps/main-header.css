@@ -4,10 +4,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin-bottom: 10px; */
     height: 9vh;
     padding: 0 1rem;
-    /* box-shadow: 0 0 10px; */
     border-bottom: 1px solid var(--hovermode);
     position: relative;
 }
@@ -36,7 +34,7 @@
 
 .nav-bar {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 10vh;
     transform: translateX(150%);

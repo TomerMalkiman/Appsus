@@ -54,4 +54,8 @@
     }
 }
 
-@media (max-width: 450px) {}
+@media (max-width: 450px) {
+    .note-icon {
+        opacity: 1;
+    }
+}

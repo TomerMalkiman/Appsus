@@ -12,7 +12,7 @@ export default {
         <section :style="bgc" class="note">
             <component :is="note.type" :note="note" @click="openEditor(note.id)" @todo-done="toggleTodo"/>
             <div class="options">
-                <img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" @mouseover="openPalette" @mouseleave="closePalette"/>
+                <img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" @click="clickOpenPalette" @mouseover="openPalette" @mouseleave="closePalette"/>
                 <img @click="togglePin(note.id)" class="note-icon pin" :class="isPinned" src="img/keep-icons/pin.png" />
                 <img @click="duplicateNote(note.id)" class="note-icon duplicate" src="img/keep-icons/duplicate.png" />
                 <img @click="openEditor(note.id)" class="note-icon edit" src="img/keep-icons/edit.png" />
@@ -163,6 +163,10 @@ export default {
                 this.isMouseOverPalette = false
             }, 1000)
         },
+        clickOpenPalette() {
+            this.isPaletteOpen = true;
+            setTimeout(() => this.isPaletteOpen = false, 3000)
+        }
     },
     computed: {
         bgc() {

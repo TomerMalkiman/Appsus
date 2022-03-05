@@ -9,7 +9,6 @@ export default {
             </div>
             <nav class="nav-bar" :class="navOpened">
                 <router-link to="/"><img src="img/home.png" alt="" @click="toggleNav"></router-link>
-                <!-- <router-link to="/book">Books</router-link> -->
                 <router-link to="/mail"><img src="img/gmail.png" alt="" @click="toggleNav"></router-link>
                 <router-link to="/notes"><img src="img/keep-icon.png" alt="" @click="toggleNav"></router-link>
                 <router-link to="/about"><img src="img/about.png" alt="" @click="toggleNav"></router-link>
@@ -18,15 +17,20 @@ export default {
     `,
     data() {
         return {
+            isNavDisplayed: false,
             isNavOpen: false,
         }
     },
     methods: {
         toggleNav() {
-            this.isNavOpen = !this.isNavOpen;
+            this.isNavDisplayed = !this.isNavDisplayed;
+            setTimeout(() => this.isNavOpen = !this.isNavOpen, 10)
         },
     },
     computed: {
+        navDisplayed() {
+            return this.isNavDisplayed ? 'display: block' : 'display: none'
+        },
         navOpened() {
             return this.isNavOpen ? 'open-nav' : ''
         },
