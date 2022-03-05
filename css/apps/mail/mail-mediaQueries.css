@@ -1,64 +1,75 @@
 @media (max-width: 1270px) {
-    .mail-date{
-        right: 25px;
+    .mail-date {
+        right: 0px;
+        transform: translate(0);
     }
-
 }
 
 @media (max-width: 1190px) {
-    .mail-subject{
+    .mail-subject {
         width: 25%;
     }
 }
 
-@media (max-width:1120px){
-
+@media (max-width:1120px) {
+    .mails-screen {
+        display: flex;
+    }
+    .mail-nav {
+        width: 20vw;
+    }
+    .mail-list {
+        width: 80vw;
+    }
     .mail-preview a {
         flex-direction: column;
     }
-
-    .mail-content{
-        width:80%
+    .mail-content {
+        width: 80vw;
     }
-
-    .mail-preview{
+    .mail-preview {
         padding: 17px 10px;
     }
-
-    .star{
-        transform: translateY(-12%);
+    .star {
+        transform: translate(-20px, -12%);
         position: absolute;
         right: 30px;
         bottom: 0;
     }
-
-    .actions-btns{
+    .actions-btns {
         right: 0;
-        transform: translateX(-10px);
-        transform: translateY(-10px);
+        transform: translate(-50px, -10px);
     }
-
-    .mail-date{
+    .mail-date {
         width: 15%;
     }
-
+    .perecantage {
+        width: 185px;
+    }
 }
 
-
-@media (max-width:870px){
-    .mails-screen {
-       display: flex;
+@media (max-width:890px) {
+    .mail-nav {
+        width: 50px;
     }
-
-    .mail-nav{
-        width: 20%;  
+    .mail-list {
+        width: 100%;
     }
-
-    .mails-list {
-        width: 80%;
+    .mail-nav> :not(:first-child, :last-child) {
+        padding-left: 10px;
     }
-
+    .open-send-mail {
+        transform: translate(75%, 0%);
+        width: 51vw;
+    }
+    .add-mail .send-mail-top {
+        width: 51vw;
+    }
+    .compose-btn {
+        position: fixed;
+        background-color: white;
+        z-index: 1;
+        left: 10px;
+        bottom: 8vh;
+    }
 }
-
-
-

@@ -33,7 +33,10 @@ export default {
     created() {
         const id = this.$route.params.mailId;
         mailService.getMail(id)
-            .then(mail => this.mail = mail)
+            .then(mail => {
+                this.mail = mail
+                mailService.readMail(mail.id)
+            })
 
         mailService._createMails()
             .then(mails => {

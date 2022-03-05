@@ -8,26 +8,26 @@ export default {
               <nav class="mail-nav">
                   <div @click="compose" class="compose-btn">
                       <img src="../../../../img/mail-icons/compose.jpg" alt="">
-                      <div>Compose</div>
+                      <div> Compose </div>
                   </div>
                   <div :class="optionSelected" @click="changeMode" @click="setStatus('inbox')"
                    class="inbox" :style="filterBy === 'inbox' ? 
                    'background-color: #fce8e6;color:#D93025;font-weight:bold' : ''"> 
-                   <span class="fa-solid fa-inbox"></span> Inbox</div>
+                   <span class="fa-solid fa-inbox"></span> <span v-if="width > 890"> Inbox </span></div>
 
                   <div @click="setStatus('starred')" class="starred"
                    :style="filterBy === 'starred' ? 'background-color: #e8eaed;font-weight:bold' : ''" > 
-                      <span class="fa-solid fa-star"></span> Starred</div>
+                      <span class="fa-solid fa-star"></span> <span v-if="width > 890">  Starred </span></div>
 
                   <div @click="setStatus('sent-mails')" class="sent-mails"
                   :style="filterBy === 'sent-mails' ? 'background-color: #e8eaed;font-weight:bold' : ''"> 
-                      <span  class="fa-solid fa-paper-plane" ></span> Sent</div>
+                      <span  class="fa-solid fa-paper-plane" ></span> <span v-if="width > 890">  Sent </span></div>
 
                   <div @click="setStatus('deleted')" class="deleted-mails"
                   :style="filterBy === 'deleted' ? 'background-color: #e8eaed;font-weight:bold' : ''">
-                       <span class="fa-solid fa-trash-can"></span> Deleted</div>
+                       <span class="fa-solid fa-trash-can"></span>  <span v-if="width > 890"> Deleted </span></div>
 
-                  <div class="perecantage">
+                  <div class="perecantage" v-if="width > 890">
                       <div class="perecantage-color" >
                              <svg> 
                                     <circle cx="70" cy="70" r="70"> </circle>
@@ -45,11 +45,14 @@ export default {
       `,
     components: {},
     created() {
-
+        window.addEventListener("resize", () => {
+            this.width = window.innerWidth
+        })
     },
     data() {
         return {
-            filterBy: 'inbox'
+            filterBy: 'inbox',
+            width: window.innerWidth
         }
     },
     methods: {
@@ -59,7 +62,7 @@ export default {
         },
         compose() {
             eventBus.emit('compose', true)
-        }
+        },
     },
     computed: {
         unReadMailsDisplay() {

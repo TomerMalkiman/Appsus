@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     height: 9vh;
     padding: 0 1rem;
     /* box-shadow: 0 0 10px; */
@@ -30,6 +30,7 @@
 }
 
 .app-header .nav-icon {
+    cursor: pointer;
     border-radius: 50%;
 }
 

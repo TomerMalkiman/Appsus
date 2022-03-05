@@ -1,15 +1,15 @@
 export default {
-  // props: [""],
-  template: `
-        <section>
+    // props: [""],
+    template: `
+        <section class="main-layout">
         </section>
     `,
-  components: {},
-  created() {},
-  data() {
-    return {}
-  },
-  methods: {},
-  computed: {},
-  unmounted() {},
+    components: {},
+    created() {},
+    data() {
+        return {}
+    },
+    methods: {},
+    computed: {},
+    unmounted() {},
 }

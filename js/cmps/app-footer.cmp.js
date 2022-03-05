@@ -1,7 +1,7 @@
 export default {
-    template:`
+    template: `
         <footer class="app-footer">
-            <p>&copy; Coffeerights 2022</p>
+            <p>&copy; By Ben and Tomer The Mens of the Mens</p>
         </footer>
     
     `

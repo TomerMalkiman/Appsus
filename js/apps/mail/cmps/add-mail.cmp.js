@@ -3,8 +3,8 @@ import { mailService } from '../services/mail.service.js'
 
 
 export default {
-  template: `
-     <section  class="add-mail" :class="modalStatus" :style="newMailUpDown">
+    template: `
+     <section @click="toggleNewMail" class="add-mail" :class="modalStatus" :style="newMailUpDown">
              <div class="send-mail-top">
                   <h2>New Massage</h2>
                   <div class="sent-buttons-container">
@@ -39,61 +39,64 @@ export default {
 
     </section>
       `,
-  data() {
-    return {
-      newMail: {
-        id:'',
-        status: 'inbox',
-        subject: '',
-        body: '',
-        isRead: false,
-        isStarred: false,
-        isSent: true,
-        sentAt: Date.now(),
-        to: '',
-        from: ''
-      },
+    data() {
+        return {
+            newMail: {
+                id: '',
+                status: 'inbox',
+                subject: '',
+                body: '',
+                isRead: false,
+                isStarred: false,
+                isSent: true,
+                sentAt: Date.now(),
+                to: '',
+                from: ''
+            },
 
-      displayModal: false,
-      isNewMailOpen : false
+            displayModal: false,
+            isNewMailOpen: false
+        }
+    },
+    created() {
+        this.unsubscribe = eventBus.on('compose', this.openModal)
+    },
+    methods: {
+        sendMail(mail) {
+            mail.from = 'Moshiko'
+            mailService.saveMail(mail)
+                .then(newMail => {
+                    this.displayModal = false
+                    this.$emit('addMail', newMail)
+                })
+
+        },
+        openModal() {
+            this.displayModal = true
+        },
+        closeModal(e) {
+            e.stopPropagation()
+            this.isNewMailOpen = false
+            this.displayModal = false
+        },
+        toggleNewMail(e) {
+            e.stopPropagation()
+            this.isNewMailOpen = !this.isNewMailOpen
+        },
+
+    },
+    computed: {
+        modalStatus() {
+            console.log(this.displayModal);
+            return (this.displayModal) ? 'open-send-mail' : '';
+        },
+        newMailUpDown() {
+            if (window.innerWidth <= 890 && this.isNewMailOpen) return 'transform: translate(75%, 93%)'
+            return (this.isNewMailOpen) ? 'transform: translate(150%, 93%)' : '';
+
+        }
+    },
+    unmounted() {
+        this.unsubscribe();
     }
-  },
-  created() {
-    this.unsubscribe = eventBus.on('compose', this.openModal)
-  },
-  methods: {
-    sendMail(mail) {
-      mail.from = 'Moshiko'
-      mailService.saveMail(mail)
-        .then(newMail => {
-          this.displayModal = false
-          this.$emit('addMail',newMail)
-        })
-
-    },
-    openModal() {
-      this.displayModal = true
-    },
-    closeModal() {
-      this.displayModal = false
-    },
-    toggleNewMail() {
-      this.isNewMailOpen = !this.isNewMailOpen
-    },
-   
-  },
-  computed: {
-    modalStatus() {
-      console.log(this.displayModal);
-      return (this.displayModal) ? 'open-send-mail' : '';
-    },
-    newMailUpDown(){
-
-      return (this.isNewMailOpen) ? 'transform: translate(150%, 93%)' : '';
-
-    }
-  },
-  unmounted() {
-    this.unsubscribe();
-}
 }

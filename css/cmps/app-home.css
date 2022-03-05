@@ -1,0 +1,61 @@
+.home-page {
+    text-align: center;
+    background-color: #FFF5E5;
+    width: 100vw;
+    display: grid;
+    font-family: Spartan;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "horse . . . . ." "horse header header header header header" "horse description description description description description" "horse links links links links links" "horse links links links links links" "horse . . . . .";
+}
+
+.horse {
+    grid-area: horse;
+}
+
+.header {
+    grid-area: header;
+    font-size: 4rem;
+    font-family: Spartan;
+}
+
+.description {
+    grid-area: description;
+    font-size: 2rem;
+    font-family: Spartan;
+}
+
+.links-container {
+    grid-area: links;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.links-container>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.links-container>* h1 {
+    font-size: 1.5rem;
+}
+
+.links-container>* p {
+    font-size: .8rem;
+}
+
+.links-container>* img {
+    height: 80px;
+}
+
+.mail-app {
+    flex-basis: 50%;
+}
+
+.keep-app {
+    flex-basis: 50%;
+}

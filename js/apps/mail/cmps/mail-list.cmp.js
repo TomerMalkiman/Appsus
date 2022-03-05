@@ -6,7 +6,7 @@ export default {
         <section class="mail-list">
             <ul class="clean-list">
                 <li v-for="mail in mails" :key="mail.id">
-                        <mail-preview  @mark-star="toggleStar(mail.id)" 
+                        <mail-preview  @mark-star="toggleStar(mail.id)"
                         @remove="remove(mail.id)" @toggle-read="toggleRead(mail.id)" :mail="mail"/>
                 </li>
 
@@ -18,9 +18,9 @@ export default {
     components: {
         mailPreview
     },
-    created() { 
-        this.mails.sort((a,b)=> (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
-       
+    created() {
+        this.mails.sort((a, b) => (a.sentAt > b.sentAt) ? -1 : ((b.sentAt > a.sentAt) ? 1 : 0))
+
     },
     data() {
         return {
@@ -38,12 +38,10 @@ export default {
         },
         remove(mailId) {
             this.currMail = this.mails.find(mail => mail.id === mailId);
-            if(this.currMail.status === 'deleted')  this.$emit('remove', mailId);
-            else this.$emit('delete',mailId);
+            if (this.currMail.status === 'deleted') this.$emit('remove', mailId);
+            else this.$emit('delete', mailId);
         },
     },
     computed: {},
-    unmounted() { },
+    unmounted() {},
 }
-
-

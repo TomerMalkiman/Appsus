@@ -143,7 +143,7 @@ export default {
     },
     computed: {
         bgc() {
-            return this.note.style.backgroundColor ? `background-color: ${this.note.style.backgroundColor}` : ''
+            return this.note.style.backgroundColor ? `background-color: ${this.note.style.backgroundColor}; border: 1px solid ${this.note.style.backgroundColor}` : ''
 
         },
         isPinned() {
