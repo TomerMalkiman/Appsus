@@ -1,7 +1,7 @@
 .note-filter {
     display: flex;
     justify-content: center;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .note-filter nav {
@@ -17,6 +17,7 @@
     cursor: pointer;
     transform: translateX(-20%);
     border-radius: 5rem;
+    transition: background-color .3s;
 }
 
 .note-filter nav>*:hover {
@@ -44,6 +45,6 @@
 }
 
 .note-filter img {
-    width: 20px;
+    width: 25px;
     margin-right: 5px;
 }

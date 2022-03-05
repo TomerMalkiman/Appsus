@@ -4,10 +4,10 @@ import { utilService } from '../../../services/util.service.js'
 export default {
     template: `
         <section class="add-note">
-            <div v-if="isInputFocused || isTitleFocused" class="title-input-container">    
-                <input type="text" @focus="titleFocused" @blur="titleBlured" class="title-input" v-model="note.info.title" placeholder="Add title" @keyup.enter="saveNote" />
-            </div>
             <div class="add-note-cmd">
+                <div v-if="isInputFocused || isTitleFocused" class="title-input-container">    
+                    <input type="text" @focus="titleFocused" @blur="titleBlured" class="title-input" v-model="note.info.title" placeholder="Add title" @keyup.enter="saveNote" />
+                </div>
                 <input ref="noteInput" v-if="note.type=== 'note-txt'" v-model="note.info.txt" type="text" @blur="inputBlured" @focus="inputFocused" :placeholder="noteType" @keyup.enter="saveNote">
                 <input ref="noteInput" v-if="note.type === 'note-img' || note.type === 'note-video'" v-model="note.info.url" @blur="inputBlured" @focus="inputFocused" type="text" :placeholder="noteType" @keyup.enter="saveNote">
                 <input ref="noteInput" v-if="note.type === 'note-todos'" v-model="note.info.label" type="text" :placeholder="noteType" @keyup.enter="saveNote">
@@ -115,7 +115,6 @@ export default {
                     todos: null,
                     label: null,
                 }
-
             }
         },
         inputFocused() {
@@ -124,7 +123,9 @@ export default {
         inputBlured() {
             setTimeout(() => {
                 this.isInputFocused = false;
-                if (this.isTitleFocused === false) {}
+                if (this.isTitleFocused === false) {
+                    this.saveNote()
+                }
             }, 10)
         },
         titleFocused() {
@@ -133,7 +134,9 @@ export default {
         titleBlured() {
             setTimeout(() => {
                 this.isTitleFocused = false;
-                if (this.isInputFocused === false) {}
+                if (this.isInputFocused === false) {
+                    this.saveNote()
+                }
             }, 10);
         },
     },

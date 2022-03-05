@@ -6,22 +6,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .add-note .title-input-container {
     position: absolute;
     padding: 5px 10px;
     background-color: #fff;
-    left: 50%;
+    left: 0;
+    top: 0;
+    transform: translateY(-120%);
     box-shadow: 0 0 10px;
     margin-bottom: 10px;
     border-radius: 8px;
-    transform: translate(-152%, -160%);
 }
 
 .add-note .title-input {
     border: none;
+    transform: translate(0, 0);
 }
 
 .add-note .title-input:focus-visible {
@@ -30,7 +31,11 @@
 
 .add-note-cmd {
     position: relative;
-    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    max-width: 500px;
     height: 50px;
     background-color: white;
     box-shadow: 0 0 10px;
@@ -41,8 +46,8 @@
     width: 50%;
     height: 50%;
     border: none;
-    left: 0;
-    transform: translate(5%, 50%);
+    /* left: 0; */
+    /* transform: translate(5%, 50%); */
 }
 
 .add-note-cmd input:focus+.title-input {
@@ -56,7 +61,7 @@
 .add-note-types {
     position: absolute;
     right: 0;
-    transform: translateY(-42%);
+    /* transform: translateY(-42%); */
 }
 
 .add-note .add-note-types>* {
