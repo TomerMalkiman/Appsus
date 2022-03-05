@@ -27,8 +27,17 @@ export default {
                   :style="filterBy === 'deleted' ? 'background-color: #e8eaed;font-weight:bold' : ''">
                        <span class="fa-solid fa-trash-can"></span> Deleted</div>
 
-                  <div class="precantage" style='height:20px'>
-                      <div class="precantage-color" style='height:20px' :style="[width,bgc]">{{unReadMailsDisplay}}%</div>
+                  <div class="perecantage">
+                      <div class="perecantage-color" >
+                             <svg> 
+                                    <circle cx="70" cy="70" r="70"> </circle>
+                                     <circle :style="[colorCircle,bgc]" cx="70" cy="70" r="70"> </circle>
+                             </svg>
+                             <div class="unread-num">
+                                 <h2>{{unReadMailsDisplay}}<span>%</span></h2>
+                             </div>
+                      </div>
+                        <h2 class="unread-text">Unread mails</h2>
                   </div>
               </nav>
           </section>
@@ -39,7 +48,6 @@ export default {
     created() { },
     data() {
         return {
-            unReadCounter: 0,
             filterBy: 'inbox'
         }
     },
@@ -54,35 +62,38 @@ export default {
     },
     computed: {
         unReadMailsDisplay() {
-            console.log(this.mails)
+            const mailsAmount = (this.mails.length) ? this.mails.length : 1; //prevent dividing by 0;
+            var unReadMails = 0;
             this.mails.forEach(mail => {
-                if (mail.isRead && !mail.isDeleted) this.unReadCounter++;
+                if (mail.isRead && !mail.isDeleted) unReadMails++;
             })
-            return ((this.unReadCounter / this.mails.length) * 100).toFixed();
+            return ((unReadMails / mailsAmount) * 100).toFixed();
         },
 
         bgc() {
-            var color = 'red';
-            // const unreadPrecantage = ((this.readCounter / this.mails.length) * 100).toFixed();
+            var strokeColor = '#98FB98';
             const unreadPrecantage = this.unReadMailsDisplay
-            if (unreadPrecantage > 80) color = 'orange'
-            else if (unreadPrecantage > 50) color = 'yellow'
-            else if (unreadPrecantage > 20) color = 'green'
-            return 'background-color : ' + color;
+            if (unreadPrecantage > 80) strokeColor = 'red'
+            else if (unreadPrecantage > 50) strokeColor = 'orange'
+            else if (unreadPrecantage > 20) strokeColor = '#F9F871'
+            return 'stroke : ' + strokeColor;
 
         },
         width() {
-            const unreadPrecantage = ((this.unReadCounter / this.mails.length) * 100).toFixed();
+            const unreadPrecantage = this.unReadMailsDisplay;
             return 'width : ' + unreadPrecantage + '%';
         },
         setInboxColor() {
             return (this.filterBy === 'inbox') ? 'inbox-nav' : '';
         },
-      },
-        setColor(filter) {
-            return this.filterBy === filter ? 'nav-option' : '';
+        colorCircle() {
+            return `stroke-dashoffset: calc(440 - (440*${this.unReadMailsDisplay}) / 100);`
+        }
+    },
+    setColor(filter) {
+        return this.filterBy === filter ? 'nav-option' : '';
 
-      },
+    },
 
     unmounted() { },
 }

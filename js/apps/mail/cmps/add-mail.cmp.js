@@ -4,24 +4,39 @@ import { mailService } from '../services/mail.service.js'
 
 export default {
   template: `
-     <section class="add-mail" :class="modalStatus">
+     <section  class="add-mail" :class="modalStatus">
              <div class="send-mail-top">
                   <h2>New Massage</h2>
-                  <button @click="closeModal">x</button>
-              </div>
+                  <div class="sent-buttons-container">
+                      <span class="toggle-new-mail" @click="toggleNewMail">|</span>
+                     <span class="close-new-mail" @click="closeModal">X</span>
+                  </div>
+            </div>
+
+              <section class="inputs-container">
                  <form >
-                    <div class="send-mail-input">
-                    To<input type="email"  v-model="newMail.to" ></div> 
+                    <div class="addressee-input-container">
+                         <input class="send-mail-input" type="email"  
+                          v-model="newMail.to" placeholder="To" >
+                   </div>
 
-                   <div class="send-mail-subject"> 
-                     Subject<input type="text"  v-model="newMail.subject"></div>  
+                   <div class="subject-input-container"> 
+                        <input class="send-mail-subject" type="text"
+                        v-model="newMail.subject" placeholder="Subject">
+                   </div>  
+                  
+                        <div> 
+                            <textarea class="send-mail-text"   
+                            v-model="newMail.body"></textarea>
+                        </div> 
 
-                   <div> 
-                   <textarea rows="15" cols="50"  v-model="newMail.body"></textarea>
-                   </div>     
-                   <button class="submit-send-btn" @click="sendMail(newMail)">send</button>
-                </form>      
-             </div> 
+                        <div class="new-mail-btns">   
+                            <button class="submit-send-btn" @click="sendMail(newMail)">send</button>
+                            <div class="new-mail-remove-btn btn" @click="closeModal"><i class=" fa-solid fa-trash-can fa-2x"></i></div>
+                        </div> 
+                </form>  
+           </section>    
+
     </section>
       `,
   data() {
@@ -40,6 +55,7 @@ export default {
       },
 
       displayModal: false,
+      // isNewMailOpen : false
     }
   },
   created() {
@@ -61,11 +77,20 @@ export default {
     closeModal() {
       this.displayModal = false
     },
+    // toggleNewMail() {
+    //   this.isNewMailOpen = !this.isNewMailOpen
+    // },
+   
   },
   computed: {
     modalStatus() {
       return (this.displayModal) ? 'open-send-mail' : '';
     },
+    // newMailUpDown(){
+
+    //   return (this.isNewMailOpen) ? 'close-down' : 'open-up';
+
+    // }
   },
   unmounted() {
     this.unsubscribe();
