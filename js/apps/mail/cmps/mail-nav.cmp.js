@@ -85,23 +85,12 @@ export default {
         setInboxColor() {
             return (this.filterBy === 'inbox') ? 'inbox-nav' : '';
         },
-<<<<<<< HEAD
         colorCircle() {
             return `stroke-dashoffset: calc(440 - (440*${this.unReadMailsDisplay}) / 100);`
         }
     },
     setColor(filter) {
         return this.filterBy === filter ? 'nav-option' : '';
-
-    },
-
-    unmounted() { },
-}
-=======
-    },
-    setColor(filter) {
-        return this.filterBy === filter ? 'nav-option' : '';
->>>>>>> 776c6dd4fcd603c25e561972ddad8853273500b4
 
     },
 
