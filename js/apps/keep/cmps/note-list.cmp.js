@@ -3,7 +3,7 @@ import notePreview from "./note-preview.cmp.js"
 export default {
     props: ["pinnedNotes", "unPinnedNotes"],
     template: `
-        <section class="notes main-layout">
+        <section class="notes">
             <section class="note-list pinned-notes" v-if="pinnedNotes">
                 <h4 class="pinned-headline">Pinned</h4>
                 <note-preview v-for="note in pinnedNotes" :key="note.id" :note="note" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-duplicate="duplicateNote" @editor-opened="openScreen" @note-edited="editNote" />
