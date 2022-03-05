@@ -2,14 +2,15 @@ import noteTxt from "./note-txt.cmp.js"
 import noteTodos from "./note-todos.cmp.js"
 import noteVideo from "./note-video.cmp.js"
 import noteImg from "./note-img.cmp.js"
+import { eventBus } from "../../../services/eventBus-service.js"
 
 
 export default {
     props: ["note"],
     template: `
     <section class="note-container" v-if="note" >
-        <section draggable="true" :style="bgc" class="note">
-            <component :is="note.type" :note="note" @todo-done="toggleTodo"/>
+        <section :style="bgc" class="note">
+            <component :is="note.type" :note="note" @click="openEditor(note.id)" @todo-done="toggleTodo"/>
             <div class="options">
                 <input v-model="note.style.backgroundColor" @input="updateBgc(note.id)" type="color" :id="note.id">
                 <label :for="note.id"><img class="note-icon paintbrush" src="img/keep-icons/paintbrush.png" /></label>
@@ -18,14 +19,24 @@ export default {
                 <img @click="openEditor(note.id)" class="note-icon edit" src="img/keep-icons/edit.png" />
                 <img @click="deleteNote(note.id)" class="note-icon delete" src="img/keep-icons/delete.png"/>
             </div>
-            <div v-if="editedNote" class="editing-cmd">
-                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video' || editedNote.type === 'note-txt'" type="text" placeholder="Edit Title" v-model="editedNote.info.title">
-                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video'" type="text" placeholder="Enter New Url" v-model="editedNote.info.url">
-                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-txt'" type="text" placeholder="Enter New Txt" v-model="editedNote.info.txt">
-                <input @input="editNote(note.id)" v-if="editedNote.type === 'note-todos'" type="text" placeholder="Enter New Label" v-model="editedNote.info.label">
-            </div>
         </section>
     </section>
+    <div v-if="editedNote" class="editing-cmd" :style="bgc">
+        <div class="img-video-container">
+            <img v-if="editedNote.type==='note-img'" :src="editedNote.info.url" alt="">
+            <iframe v-if="editedNote.type === 'note-video'" width="250px"
+            :src="note.info.url">
+        </iframe>
+        </div>
+        <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video' || editedNote.type === 'note-txt'" type="text" class="title-input" placeholder="Enter Title" v-model="editedNote.info.title">
+        <input @input="editNote(note.id)" v-if="editedNote.type === 'note-img' || editedNote.type === 'note-video'" type="text" class="url-input" placeholder="Enter New Url" v-model="editedNote.info.url">
+        <input @input="editNote(note.id)" v-if="editedNote.type === 'note-txt'" class="txt-input" type="text" placeholder="Enter New Txt" v-model="editedNote.info.txt">
+        <input @input="editNote(note.id)" v-if="editedNote.type === 'note-todos'" type="text" placeholder="Enter New Label" v-model="editedNote.info.label">
+        <input v-if="editedNote.type === 'note-todos'" v-for="todo in note.info.todos" v-model="todo.txt" type="text" :style="todo.doneAt? 'text-decoration: line-through;' : ''">
+        <div class="options-editing">
+                <img @click="deleteNote(note.id)" class="note-icon delete" src="img/keep-icons/delete.png"/>
+        </div>
+    </div>
         `,
     components: {
         noteTodos,
@@ -33,7 +44,9 @@ export default {
         noteTxt,
         noteVideo
     },
-    created() {},
+    created() {
+        const unsubscribe = eventBus.on('screen-closed', this.closeEditor)
+    },
     data() {
         return {
             editedNote: null,
@@ -42,6 +55,8 @@ export default {
     methods: {
         deleteNote(noteId) {
             this.$emit('note-deleted', noteId)
+            if (this.editedNote) this.$emit('editor-opened')
+            this.editedNote = null
         },
         togglePin(noteId) {
             this.$emit('note-pinned', noteId)
@@ -56,6 +71,7 @@ export default {
             this.$emit('note-duplicate', noteId)
         },
         openEditor(noteId) {
+            this.$emit('editor-opened')
             if (this.editedNote) {
                 this.editedNote = null;
                 return
@@ -71,7 +87,7 @@ export default {
                             txt: this.note.info.txt,
                         },
                         style: {
-                            backgroundColor: this.note.backgroundColor
+                            backgroundColor: this.note.style.backgroundColor,
                         }
                     }
                     break
@@ -85,7 +101,7 @@ export default {
                             title: this.note.info.title
                         },
                         style: {
-                            backgroundColor: this.note.backgroundColor
+                            backgroundColor: this.note.style.backgroundColor
                         }
                     }
                     break;
@@ -99,7 +115,7 @@ export default {
                             title: this.note.info.title
                         },
                         style: {
-                            backgroundColor: this.note.backgroundColor
+                            backgroundColor: this.note.style.backgroundColor
                         }
                     }
                     break;
@@ -120,6 +136,9 @@ export default {
         },
         editNote(noteId) {
             this.$emit('note-edited', noteId, this.editedNote)
+        },
+        closeEditor() {
+            this.editedNote = null;
         }
     },
     computed: {
@@ -129,6 +148,6 @@ export default {
         },
         isPinned() {
             return this.note.isPinned ? 'pinned' : ''
-        }
+        },
     },
 }

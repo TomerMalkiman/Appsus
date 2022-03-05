@@ -2,14 +2,16 @@ import { noteService } from "../services/note-service.js"
 import noteList from "../cmps/note-list.cmp.js"
 import addNote from "../cmps/add-note.cmp.js"
 import noteFilter from "../cmps/note-filter.cmp.js"
+import { eventBus } from "../../../services/eventBus-service.js"
 
 export default {
     template: `
-        <section v-if="pinnedNotes || unPinnedNotes" class="main-keep-app main-layout">
+        <section v-if="pinnedNotes || unPinnedNotes" class="main-keep-app main-layout" :class="toggleScreen">
+            <div class="main-screen" @click="closeScreen"></div>
             <note-filter @filter-set="setFilter"/>
             <div class="right-side">
                 <add-note @save-note="saveNote"/>
-                <note-list :unPinnedNotes="unPinnedNotesForDisplay" :pinnedNotes="pinnedNotesForDisplay" @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-edited="editNote" @note-duplicate="duplicateNote" />
+                <note-list :unPinnedNotes="unPinnedNotesForDisplay" :pinnedNotes="pinnedNotesForDisplay"  @note-pinned="togglePin" @note-deleted="deleteNote" @note-bgc-updated="updateBgc" @todo-done="toggleTodo" @note-edited="editNote" @note-duplicate="duplicateNote" @editor-opened="openScreen" />
             </div>
         </section>
     `,
@@ -32,7 +34,8 @@ export default {
             filterBy: {
                 type: 'all',
                 txt: '',
-            }
+            },
+            isScreenOpen: false,
         }
     },
     methods: {
@@ -106,7 +109,14 @@ export default {
                         this.unPinnedNotes[renderedNoteIdx] = newNote
                     }
                 })
-        }
+        },
+        openScreen() {
+            this.isScreenOpen = !this.isScreenOpen;
+        },
+        closeScreen() {
+            eventBus.emit('screen-closed')
+            this.isScreenOpen = !this.isScreenOpen
+        },
     },
     computed: {
         pinnedNotesForDisplay() {
@@ -148,6 +158,9 @@ export default {
                     }
                 }
             })
+        },
+        toggleScreen() {
+            return this.isScreenOpen ? 'open-screen' : ''
         }
     },
     unmounted() {},

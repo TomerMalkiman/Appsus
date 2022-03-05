@@ -84,7 +84,7 @@ function saveNote(note) {
                 title: note.info.title
             },
             style: {
-                backgroundColor: "#f7f7f7"
+                backgroundColor: utilService.getRandomColor()
             }
         }
     } else if (note.type === 'note-txt') {
@@ -97,7 +97,7 @@ function saveNote(note) {
                 txt: note.info.txt
             },
             style: {
-                backgroundColor: "#f7f7f7"
+                backgroundColor: utilService.getRandomColor()
             }
         }
     } else if (note.type === 'note-todos') {
@@ -110,7 +110,7 @@ function saveNote(note) {
                 todos: note.info.todos
             },
             style: {
-                backgroundColor: "#f7f7f7"
+                backgroundColor: utilService.getRandomColor()
             }
         }
     } else if (note.type === 'note-img') {
@@ -123,7 +123,7 @@ function saveNote(note) {
                 title: note.info.title
             },
             style: {
-                backgroundColor: "#f7f7f7"
+                backgroundColor: utilService.getRandomColor()
             }
         }
     }
@@ -147,7 +147,7 @@ function _createNotes() {
                             txt: "Fullstack Me Baby!"
                         },
                         style: {
-                            backgroundColor: "#f7f7f7"
+                            backgroundColor: utilService.getRandomColor()
                         }
                     },
                     {
@@ -162,7 +162,7 @@ function _createNotes() {
                             ],
                         },
                         style: {
-                            backgroundColor: "#f7f7f7"
+                            backgroundColor: utilService.getRandomColor()
                         }
                     },
                     {
@@ -171,10 +171,10 @@ function _createNotes() {
                         isPinned: true,
                         info: {
                             url: "https://i.pinimg.com/originals/4f/b5/88/4fb5886838c0492fc4b0cee3de87b648.jpg",
-                            title: "Bobi and Me"
+                            title: "Programmer Life"
                         },
                         style: {
-                            backgroundColor: "#f7f7f7"
+                            backgroundColor: utilService.getRandomColor()
                         }
                     },
                     {
@@ -187,7 +187,19 @@ function _createNotes() {
 
                         },
                         style: {
-                            backgroundColor: "#f7f7f7"
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    },
+                    {
+                        id: utilService.makeId(),
+                        type: "note-img",
+                        isPinned: true,
+                        info: {
+                            url: "https://i.imgflip.com/67f8oz.jpg",
+                            title: "Box Shadow"
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
                         }
                     },
                 ]

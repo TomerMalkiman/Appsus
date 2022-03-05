@@ -8,11 +8,11 @@ export default {
                 <img src="img/menu.png" alt="" @click="toggleNav">
             </div>
             <nav class="nav-bar" :class="navOpened">
-                <router-link to="/"><img src="img/home.png" alt=""></router-link>
+                <router-link to="/"><img src="img/home.png" alt="" @click="toggleNav"></router-link>
                 <!-- <router-link to="/book">Books</router-link> -->
-                <router-link to="/mail"><img src="img/gmail.png" alt=""></router-link>
-                <router-link to="/notes"><img src="img/keep-icon.png" alt=""></router-link>
-                <router-link to="/about"><img src="img/about.png" alt=""></router-link>
+                <router-link to="/mail"><img src="img/gmail.png" alt="" @click="toggleNav"></router-link>
+                <router-link to="/notes"><img src="img/keep-icon.png" alt="" @click="toggleNav"></router-link>
+                <router-link to="/about"><img src="img/about.png" alt="" @click="toggleNav"></router-link>
             </nav>
         </header>
     `,
