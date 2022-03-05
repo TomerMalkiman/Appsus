@@ -7,7 +7,9 @@ export default {
           <section>
               <nav class="mail-nav">
                   <div @click="compose" class="compose-btn">
-                      <img src="../../../../img/mail-icons/compose.jpg" alt="">
+                      <img src="img/mail-icons/compose.jpg" alt="">
+                      <!-- <img src="../../../../img/mail-icons/compose.jpg" alt=""> -->
+
                       <div> Compose </div>
                   </div>
                   <div :class="optionSelected" @click="changeMode" @click="setStatus('inbox')"

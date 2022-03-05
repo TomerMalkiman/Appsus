@@ -4,7 +4,9 @@ export default {
         <section class="mails-filter">
             <section class="mail-logo">
                 <div class="logo-img-container">
-                    <img src="../../../../img/mail-icons/mail-logo.png" width="40" height="40" alt="">
+                    <img src="img/mail-icons/mail-logo.png" width="40" height="40" alt="">
+                    <!-- <img src="../../../../img/mail-icons/mail-logo.png" width="40" height="40" alt=""> -->
+
                 </div>
                 <h1><span>S</span>mail</h1>
             </section>
